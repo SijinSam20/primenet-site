@@ -1,0 +1,2554 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrimeNet Solutions FZC — UAE Technology Integrator</title>
+  <meta name="description" content="PrimeNet Solutions FZC — Sharjah-based technology integrator delivering networking, security, biometrics, and IT infrastructure across the UAE." />
+  <link rel="icon" type="image/x-icon" href="logo/app-icon.ico" />
+  <link rel="apple-touch-icon" href="logo/PNS_Logo.png" />
+
+  <!-- Silence development warning for standalone CDN usage -->
+  <script>
+    (function () {
+      const origWarn = console.warn;
+      console.warn = function (...args) {
+        if (typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com should not be used in production')) {
+          return;
+        }
+        origWarn.apply(console, args);
+      };
+    })();
+  </script>
+
+  <!-- Tailwind CSS Production CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      try {
+        emailjs.init({
+          publicKey: "YOUR_EMAILJS_PUBLIC_KEY",
+        });
+      } catch(e) { console.log("EmailJS init note:", e); }
+    })();
+  </script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            slateDeep: '#0b1120',
+            slateMid: '#0f172a',
+            slateCard: '#111827',
+            accentCyan: '#06b6d4',
+            accentViolet: '#8b5cf6',
+            accentMint: '#34d399',
+            textMain: '#f1f5f9',
+            textSub: '#94a3b8',
+          },
+          fontFamily: {
+            sans: ['"Inter"', 'system-ui', 'sans-serif'],
+            display: ['"Poppins"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Premium Navigation Micro-interactions & Liquid Underline */
+    .premium-nav-item {
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      border-radius: 0.75rem;
+    }
+    .premium-nav-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 0.75rem;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+      opacity: 0;
+      transform: scale(0.85);
+      transition: all 0.35s ease;
+      pointer-events: none;
+    }
+    .premium-nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 8px;
+      right: 8px;
+      height: 2px;
+      border-radius: 9999px;
+      background: var(--nav-glow, linear-gradient(90deg, #06b6d4, #8b5cf6));
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0);
+    }
+    .premium-nav-item:hover {
+      transform: translateY(-2px);
+      color: #ffffff !important;
+    }
+    .premium-nav-item:hover::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .premium-nav-item:hover::after,
+    .premium-nav-item.active-nav::after {
+      transform: scaleX(1);
+      box-shadow: 0 0 12px var(--nav-glow-color, rgba(6, 182, 212, 0.7));
+    }
+    .premium-nav-item.active-nav {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Icon micro-animations */
+    .premium-nav-item i {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+    }
+    .premium-nav-item:hover i {
+      transform: scale(1.22) rotate(-6deg);
+      filter: drop-shadow(0 0 6px currentColor);
+    }
+
+    /* Brochure special download pulse */
+    .brochure-nav:hover .brochure-arrow {
+      animation: brochureBounce 1s infinite;
+    }
+    @keyframes brochureBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(3px); }
+    }
+
+    /* Mobile item premium slide */
+    .mobile-nav-link {
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .mobile-nav-link:hover {
+      padding-left: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
+    }
+
+    /* Brands Marquee & Card Hover Animations */
+    @keyframes marqueeScroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .brand-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 28s linear infinite;
+    }
+    .brand-marquee-container:hover .brand-marquee-track {
+      animation-play-state: paused;
+    }
+    .brand-logo-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .brand-logo-card:hover {
+      transform: translateY(-4px) scale(1.06);
+      border-color: rgba(6, 182, 212, 0.4);
+      box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.2), 0 0 15px rgba(139, 92, 246, 0.15);
+    }
+
+    /* Mobile Safety & Viewport Tweaks */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .safe-bottom {
+      padding-bottom: env(safe-area-inset-bottom, 1rem);
+    }
+
+    /* ========================================================
+       HERO 3D & DYNAMIC MOTION KEYFRAMES
+       ======================================================== */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .preserve-3d {
+      transform-style: preserve-3d;
+    }
+
+    @keyframes heroFloat3D {
+      0%, 100% {
+        transform: translateY(0px) rotateX(4deg) rotateY(-6deg) scale(1);
+      }
+      50% {
+        transform: translateY(-16px) rotateX(-3deg) rotateY(6deg) scale(1.02);
+      }
+    }
+    .animate-float-3d {
+      animation: heroFloat3D 6s ease-in-out infinite;
+    }
+
+    @keyframes orbitClockwise {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes orbitCounterClockwise {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    .animate-orbit-cw {
+      animation: orbitClockwise 14s linear infinite;
+    }
+    .animate-orbit-ccw {
+      animation: orbitCounterClockwise 18s linear infinite;
+    }
+    .animate-orbit-fast {
+      animation: orbitClockwise 7s linear infinite;
+    }
+
+    .animate-orbit-l2 {
+      width: 100%;
+      height: 100%;
+      animation: orbitClockwise 9s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    @keyframes lockShieldPulse {
+      0%, 100% {
+        transform: scale(1) translateZ(20px);
+        box-shadow: 0 0 25px rgba(6, 182, 212, 0.4), inset 0 0 15px rgba(6, 182, 212, 0.3);
+        border-color: rgba(6, 182, 212, 0.6);
+        background: radial-gradient(circle at center, rgba(6, 182, 212, 0.15) 0%, rgba(15, 23, 42, 0.95) 70%);
+        color: #38bdf8;
+      }
+      50% {
+        transform: scale(1.16) translateZ(40px);
+        box-shadow: 0 0 50px rgba(52, 211, 153, 0.9), 0 0 80px rgba(16, 185, 129, 0.5), inset 0 0 30px rgba(52, 211, 153, 0.5);
+        border-color: #34d399;
+        background: radial-gradient(circle at center, rgba(16, 185, 129, 0.35) 0%, rgba(6, 78, 59, 0.9) 70%);
+        color: #6ee7b7;
+      }
+    }
+    .animate-lock-defense {
+      animation: lockShieldPulse 3.5s ease-in-out infinite;
+    }
+
+    @keyframes keyAttackOrbit {
+      0% {
+        transform: rotate(0deg) translateX(120px) rotate(0deg);
+      }
+      50% {
+        transform: rotate(180deg) translateX(135px) rotate(-180deg) scale(1.12);
+      }
+      100% {
+        transform: rotate(360deg) translateX(120px) rotate(-360deg);
+      }
+    }
+    .animate-key-attack-outer {
+      animation: keyAttackOrbit 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+
+    @keyframes radarWave {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.9;
+      }
+      100% {
+        transform: scale(1.55);
+        opacity: 0;
+      }
+    }
+    .animate-radar-wave-1 {
+      animation: radarWave 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+    }
+    .animate-radar-wave-2 {
+      animation: radarWave 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 1.2s;
+    }
+
+    @keyframes ledActivity {
+      0%, 100% { opacity: 0.3; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 6px currentColor); }
+    }
+    .animate-led-blink {
+      animation: ledActivity 1.4s ease-in-out infinite;
+    }
+    .animate-led-fast {
+      animation: ledActivity 0.7s ease-in-out infinite;
+    }
+
+    html {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+
+    #chatMessages,
+    #contactModal .overflow-y-auto {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+    }
+    #chatMessages::-webkit-scrollbar,
+    #contactModal .overflow-y-auto::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    #chatMessages::-webkit-scrollbar-track,
+    #contactModal .overflow-y-auto::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    #chatMessages::-webkit-scrollbar-thumb,
+    #contactModal .overflow-y-auto::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+    }
+    #chatMessages::-webkit-scrollbar-thumb:hover,
+    #contactModal .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  </style>
+</head>
+
+<body class="bg-slateDeep text-textMain font-sans antialiased selection:bg-accentCyan/30 selection:text-white overflow-x-hidden">
+
+  <!-- Header & Navigation -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-slateDeep/85 backdrop-blur-2xl border-b border-white/[0.06] transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <nav class="flex items-center justify-between h-16 sm:h-20" aria-label="Main Navigation">
+        <a href="#" class="flex items-center shrink-0 mr-auto group" aria-label="PrimeNet Home">
+          <img src="logo/PNS_Logo.png" alt="PrimeNet Solutions FZC" class="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_0_18px_rgba(6,182,212,0.35)] group-hover:scale-105 transition-transform duration-300" />
+        </a>
+        <div class="hidden lg:flex items-center gap-1.5 lg:gap-2 ml-auto justify-end">
+          <ul class="flex items-center gap-0 lg:gap-0.5 text-xs lg:text-sm font-medium text-textSub">
+            <li>
+              <a href="#hero" style="--nav-glow: linear-gradient(90deg, #06b6d4, #38bdf8); --nav-glow-color: rgba(6,182,212,0.85);" class="premium-nav-item flex items-center gap-1 px-1.5 lg:px-2 py-1.5 group">
+                <i class="fa-solid fa-house text-[10px] text-accentCyan"></i>
+                <span class="font-semibold tracking-wide">Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="#about" style="--nav-glow: linear-gradient(90deg, #34d399, #10b981); --nav-glow-color: rgba(52,211,153,0.85);" class="premium-nav-item flex items-center gap-1 px-1.5 lg:px-2 py-1.5 group">
+                <i class="fa-solid fa-building-columns text-[10px] text-accentMint"></i>
+                <span class="font-semibold tracking-wide">About</span>
+              </a>
+            </li>
+            <li>
+              <a href="#services" style="--nav-glow: linear-gradient(90deg, #fbbf24, #f59e0b); --nav-glow-color: rgba(245,158,11,0.85);" class="premium-nav-item flex items-center gap-1 px-1.5 lg:px-2 py-1.5 group">
+                <i class="fa-solid fa-gear text-[10px] text-amber-400 group-hover:rotate-90 transition-transform duration-500"></i>
+                <span class="font-semibold tracking-wide">Services</span>
+              </a>
+            </li>
+            <li>
+              <a href="#product-categories" style="--nav-glow: linear-gradient(90deg, #f43f5e, #ec4899); --nav-glow-color: rgba(244,63,94,0.85);" class="premium-nav-item flex items-center gap-1 px-1.5 lg:px-2 py-1.5 group">
+                <i class="fa-solid fa-layer-group text-[10px] text-rose-400"></i>
+                <span class="font-semibold tracking-wide">Products</span>
+              </a>
+            </li>
+            <li>
+              <a href="#careers" style="--nav-glow: linear-gradient(90deg, #38bdf8, #818cf8); --nav-glow-color: rgba(56,189,248,0.85);" class="premium-nav-item flex items-center gap-1 px-1.5 lg:px-2 py-1.5 group">
+                <i class="fa-solid fa-briefcase text-[10px] text-sky-400"></i>
+                <span class="font-semibold tracking-wide">Careers</span>
+              </a>
+            </li>
+            <li>
+              <a href="#site-footer" style="--nav-glow: linear-gradient(90deg, #8b5cf6, #c084fc); --nav-glow-color: rgba(139,92,246,0.85);" class="premium-nav-item flex items-center gap-1 px-1.5 lg:px-2 py-1.5 group">
+                <i class="fa-solid fa-envelope text-[10px] text-violet-400"></i>
+                <span class="font-semibold tracking-wide">Contact</span>
+              </a>
+            </li>
+            <li>
+              <a href="brochure/brochure.pdf" download onclick="showToast('Downloading PrimeNet Solutions Brochure PDF...')" style="--nav-glow: linear-gradient(90deg, #10b981, #06b6d4); --nav-glow-color: rgba(16,185,129,0.85);" class="premium-nav-item brochure-nav flex items-center gap-1.5 px-2 lg:px-3 py-2 border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/15 group">
+                <i class="fa-solid fa-file-pdf text-xs text-emerald-400 brochure-arrow"></i>
+                <span class="font-semibold tracking-wide text-emerald-300 group-hover:text-white">Brochure</span>
+                <span class="text-[8px] uppercase font-bold tracking-wider px-1 py-0.5 rounded-full bg-emerald-400/20 text-emerald-300 border border-emerald-400/30">PDF</span>
+              </a>
+            </li>
+          </ul>
+          <a href="#contact" class="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-accentCyan to-accentViolet px-3.5 lg:px-4 py-1.5 text-[11px] lg:text-xs font-semibold text-white shadow-lg shadow-accentCyan/20 hover:shadow-accentCyan/40 hover:-translate-y-0.5 transition-all shrink-0 ml-1">Get in touch</a>
+        </div>
+        <div class="flex items-center lg:hidden gap-3">
+          <button id="menuBtn" onclick="toggleMobileMenu()" class="p-2 text-white rounded-lg hover:bg-white/5 transition bg-transparent border-0 cursor-pointer" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fa-solid fa-bars-staggered text-lg"></i></button>
+        </div>
+      </nav>
+    </div>
+    <div id="mobileMenu" class="lg:hidden overflow-hidden max-h-0 transition-[max-height] duration-500 ease-in-out bg-slateMid border-t border-white/5">
+      <ul class="flex flex-col gap-0.5 px-5 py-4 text-sm font-medium text-textSub">
+        <li><a href="#hero" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-house text-sm text-accentCyan w-5"></i> <span class="font-semibold text-white">Home</span></a></li>
+        <li><a href="#about" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-building-columns text-sm text-accentMint w-5"></i> <span class="font-semibold text-white">About</span></a></li>
+        <li><a href="#services" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-gear text-sm text-amber-400 w-5"></i> <span class="font-semibold text-white">Services</span></a></li>
+        <li><a href="#product-categories" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-layer-group text-sm text-rose-400 w-5"></i> <span class="font-semibold text-white">Products</span></a></li>
+        <li><a href="#careers" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-briefcase text-sm text-sky-400 w-5"></i> <span class="font-semibold text-white">Careers</span></a></li>
+        <li><a href="#site-footer" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-envelope text-sm text-violet-400 w-5"></i> <span class="font-semibold text-white">Contact</span></a></li>
+        <li><a href="brochure/brochure.pdf" download onclick="showToast('Downloading PrimeNet Solutions Brochure PDF...'); toggleMobileMenu();" class="mobile-nav-link block py-2 hover:text-white flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 px-3 rounded-xl mt-1 text-emerald-300"><span class="flex items-center gap-3"><i class="fa-solid fa-file-pdf text-sm text-emerald-400 w-5"></i> <span class="font-semibold">Download Brochure</span></span> <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-400/20 border border-emerald-400/30">PDF</span></a></li>
+        <li class="pt-3"><a href="#contact" class="block w-full text-center rounded-full bg-gradient-to-r from-accentCyan to-accentViolet px-5 py-3 font-semibold text-white shadow-lg shadow-accentCyan/20" onclick="toggleMobileMenu()">Get in touch</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero with Interactive Slides Carousel -->
+    <section id="hero" class="relative min-h-[92vh] sm:min-h-screen flex items-center overflow-hidden">
+      <canvas id="threeCanvas" class="absolute inset-0 pointer-events-none"></canvas>
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] rounded-full bg-accentCyan/20 blur-[120px] opacity-60"></div>
+        <div class="absolute bottom-[-20%] right-[-20%] w-[80vw] h-[80vw] rounded-full bg-accentViolet/20 blur-[120px] opacity-60"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-24 sm:pt-32 pb-24 sm:pb-28 w-full flex flex-col justify-between min-h-[80vh] sm:min-h-[85vh]">
+        <!-- Carousel Container with touch gestures -->
+        <div id="heroCarousel" class="relative overflow-visible w-full touch-pan-y">
+          
+          <!-- Slide 1: Enterprise Hardware & Infrastructure -->
+          <div class="hero-slide transition-all duration-700 opacity-100 block w-full" data-index="0">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[460px] sm:min-h-[520px]">
+              <div class="text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 sm:px-4 py-1.5 text-xs font-medium text-textSub backdrop-blur-sm mb-5 sm:mb-6">
+                  <span class="h-2 w-2 rounded-full bg-accentMint animate-pulse"></span>
+                  PrimeNet Solutions FZC
+                </div>
+                <h1 class="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-extrabold leading-[1.08] sm:leading-[0.95] tracking-tight text-white mb-4 sm:mb-6">
+                  A Trusted Partner<br>
+                  <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-cyan-200 to-blue-300 drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">for all your IT Solutions</span>
+                </h1>
+                <p class="text-sm sm:text-lg md:text-xl text-textSub/90 leading-relaxed mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">From network architecture and server integration to commercial hardware supply, PrimeNet Solutions delivers the technology backbone your business needs to operate with total confidence.</p>
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+                  <a href="#showcase" class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accentCyan to-accentViolet px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-accentCyan/20 hover:shadow-accentCyan/40 hover:-translate-y-1 transition-all">View Catalog</a>
+                  <button onclick="showToast('Brochure download simulated!')" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white hover:bg-white/10 hover:-translate-y-1 transition-all cursor-pointer"><i class="fa-solid fa-download text-xs sm:text-sm"></i> Brochure</button>
+                </div>
+              </div>
+
+              <!-- 3D Animated Server Rack Illustration -->
+              <div class="w-full flex items-center justify-center lg:justify-end">
+                <div class="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 flex items-center justify-center perspective-1000 overflow-visible">
+                  <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-88 md:h-88 rounded-full border border-blue-500/25 bg-blue-500/5 flex items-center justify-center preserve-3d animate-float-3d">
+                    <div class="absolute inset-2 sm:inset-3 rounded-full border border-dashed border-cyan-400/25 animate-orbit-cw pointer-events-none"></div>
+                    <div class="absolute inset-8 sm:inset-9 rounded-full border border-blue-400/20 animate-orbit-ccw pointer-events-none"></div>
+                    
+                    <div class="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full border border-cyan-400/40 animate-radar-wave-1 pointer-events-none"></div>
+                    <div class="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full border border-blue-500/30 animate-radar-wave-2 pointer-events-none"></div>
+
+                    <!-- 3D Server Blade Chassis -->
+                    <div class="relative z-10 w-48 h-60 sm:w-56 sm:h-68 rounded-3xl bg-gradient-to-b from-slate-900/95 via-blue-950/90 to-slate-950/95 border-2 border-blue-400/40 p-3 sm:p-4 flex flex-col justify-around shadow-[0_20px_50px_rgba(6,182,212,0.35)] backdrop-blur-xl preserve-3d transition-transform hover:scale-105 duration-500">
+                      <div class="flex items-center justify-between pb-2 border-b border-blue-400/20">
+                        <div class="flex items-center gap-2">
+                          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                          <span class="text-[10px] font-mono tracking-widest text-cyan-300 font-bold uppercase">CORE RACK 01</span>
+                        </div>
+                        <span class="text-[9px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">ONLINE</span>
+                      </div>
+
+                      <div class="h-8 sm:h-9 bg-blue-900/40 hover:bg-blue-800/40 rounded-xl border border-blue-400/25 flex items-center px-3 sm:px-4 justify-between transition-colors shadow-inner">
+                        <div class="flex items-center gap-2.5">
+                          <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-led-fast text-emerald-400"></div>
+                          <div class="w-2 h-2 rounded-full bg-cyan-400 animate-led-blink text-cyan-400"></div>
+                          <div class="w-1.5 h-1.5 rounded-full bg-blue-300/40"></div>
+                        </div>
+                        <div class="w-14 sm:w-16 h-2 bg-gradient-to-r from-cyan-400/60 to-blue-500/30 rounded-full"></div>
+                      </div>
+                      <div class="h-8 sm:h-9 bg-cyan-950/50 hover:bg-cyan-900/50 rounded-xl border border-cyan-400/40 flex items-center px-3 sm:px-4 justify-between transition-colors shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                        <div class="flex items-center gap-2.5">
+                          <div class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-led-fast text-amber-400"></div>
+                          <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                        </div>
+                        <div class="w-12 sm:w-14 h-2 bg-accentCyan rounded-full animate-pulse shadow-[0_0_12px_rgba(6,182,212,0.9)]"></div>
+                      </div>
+                      <div class="h-8 sm:h-9 bg-blue-900/40 hover:bg-blue-800/40 rounded-xl border border-blue-400/25 flex items-center px-3 sm:px-4 justify-between transition-colors shadow-inner">
+                        <div class="flex items-center gap-2.5">
+                          <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-led-blink text-emerald-400"></div>
+                          <div class="w-2 h-2 rounded-full bg-blue-400/40"></div>
+                        </div>
+                        <div class="w-14 sm:w-16 h-2 bg-gradient-to-r from-blue-400/40 to-blue-600/30 rounded-full"></div>
+                      </div>
+                      <div class="h-8 sm:h-9 bg-blue-900/40 hover:bg-blue-800/40 rounded-xl border border-blue-400/25 flex items-center px-3 sm:px-4 justify-between transition-colors shadow-inner">
+                        <div class="flex items-center gap-2.5">
+                          <div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+                          <div class="w-2 h-2 rounded-full bg-cyan-400 animate-led-fast text-cyan-400"></div>
+                        </div>
+                        <div class="w-14 sm:w-16 h-2 bg-gradient-to-r from-blue-400/40 to-blue-600/30 rounded-full"></div>
+                      </div>
+                      <div class="h-8 sm:h-9 bg-blue-900/40 hover:bg-blue-800/40 rounded-xl border border-blue-400/25 flex items-center px-3 sm:px-4 justify-between transition-colors shadow-inner">
+                        <div class="flex items-center gap-2.5">
+                          <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-led-blink text-emerald-400"></div>
+                          <div class="w-2 h-2 rounded-full bg-blue-400/40"></div>
+                        </div>
+                        <div class="w-14 sm:w-16 h-2 bg-gradient-to-r from-cyan-400/50 to-blue-500/30 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Specialized Equipments -->
+          <div class="hero-slide transition-all duration-700 opacity-0 hidden w-full" data-index="1">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[460px] sm:min-h-[520px]">
+              <div class="text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 sm:px-4 py-1.5 text-xs font-medium text-accentMint backdrop-blur-sm mb-5 sm:mb-6">
+                  <i class="fa-solid fa-gear"></i>
+                  Industrial Grade Equipment
+                </div>
+                <h1 class="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-extrabold leading-[1.08] sm:leading-[0.95] tracking-tight text-white mb-4 sm:mb-6">
+                  Specialized<br>
+                  <span class="bg-clip-text text-transparent bg-gradient-to-r from-accentMint via-emerald-300 to-teal-400 drop-shadow-[0_0_30px_rgba(52,211,153,0.3)]">Equipments</span>
+                </h1>
+                <p class="text-sm sm:text-lg md:text-xl text-textSub/90 leading-relaxed mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">Industrial-Grade Precision & Heavy-Duty Production Technology. We supply high-performance, specialized hardware built to handle demanding technical workflows and commercial production environments.</p>
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+                  <a href="#showcase" class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accentMint to-emerald-600 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-slateDeep shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-1 transition-all">Browse Products</a>
+                  <button onclick="showToast('Brochure download simulated!')" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white hover:bg-white/10 hover:-translate-y-1 transition-all cursor-pointer"><i class="fa-solid fa-download text-xs sm:text-sm"></i> Brochure</button>
+                </div>
+              </div>
+
+              <!-- 3D Animated Microchip & Radar Orbit -->
+              <div class="w-full flex items-center justify-center lg:justify-end">
+                <div class="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 flex items-center justify-center perspective-1000 overflow-visible">
+                  <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-88 md:h-88 rounded-full border border-emerald-500/30 bg-emerald-500/5 flex items-center justify-center preserve-3d animate-float-3d">
+                    <div class="absolute inset-2 sm:inset-3 rounded-full border border-dashed border-emerald-400/30 animate-orbit-cw pointer-events-none"></div>
+                    <div class="absolute inset-8 sm:inset-9 rounded-full border border-teal-400/25 animate-orbit-ccw pointer-events-none"></div>
+                    <div class="absolute inset-16 sm:inset-18 rounded-full border border-emerald-500/40 animate-orbit-fast pointer-events-none"></div>
+
+                    <div class="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full border-2 border-emerald-400/50 animate-radar-wave-1 pointer-events-none"></div>
+                    <div class="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full border-2 border-teal-400/40 animate-radar-wave-2 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-600 to-emerald-700 flex items-center justify-center shadow-[0_0_60px_rgba(52,211,153,0.55)] border-2 border-emerald-300/60 preserve-3d group cursor-pointer hover:scale-110 transition-transform">
+                      <div class="w-14 h-14 sm:w-18 sm:h-18 rounded-2xl bg-slate-950/90 border border-emerald-400/80 flex items-center justify-center text-accentMint text-2xl sm:text-4xl shadow-inner">
+                        <i class="fa-solid fa-microchip animate-pulse"></i>
+                      </div>
+                    </div>
+
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div class="animate-orbit-l2">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl border-2 border-emerald-300 bg-emerald-500/30 backdrop-blur-md flex items-center justify-center shadow-[0_0_25px_rgba(52,211,153,0.9)] ml-1 sm:ml-2">
+                          <div class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-accentMint shadow-[0_0_12px_#34d399] animate-ping"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Advanced Security Systems -->
+          <div class="hero-slide transition-all duration-700 opacity-0 hidden w-full" data-index="2">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[460px] sm:min-h-[520px]">
+              <div class="text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 sm:px-4 py-1.5 text-xs font-medium text-amber-300 backdrop-blur-sm mb-5 sm:mb-6">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  Full-Spectrum Security
+                </div>
+                <h1 class="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-extrabold leading-[1.08] sm:leading-[0.95] tracking-tight text-white mb-4 sm:mb-6">
+                  Advanced<br>
+                  <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-500 drop-shadow-[0_0_30px_rgba(245,158,11,0.3)]">Security Systems</span>
+                </h1>
+                <p class="text-sm sm:text-lg md:text-xl text-textSub/90 leading-relaxed mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">PrimeNet Solutions provides end-to-end commercial security deployments designed for reliability and round-the-clock protection. We integrate enterprise-grade IP video surveillance, biometric entry barriers, and smart monitoring systems.</p>
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+                  <a href="#services" class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-1 transition-all">Explore Solutions</a>
+                  <button onclick="showToast('Brochure download simulated!')" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white hover:bg-white/10 hover:-translate-y-1 transition-all cursor-pointer"><i class="fa-solid fa-download text-xs sm:text-sm"></i> Brochure</button>
+                </div>
+              </div>
+
+              <!-- 3D Animated Security Shield -->
+              <div class="w-full flex items-center justify-center lg:justify-end">
+                <div class="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 flex items-center justify-center perspective-1000 overflow-visible">
+                  <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-88 md:h-88 rounded-full border border-red-500/30 bg-red-500/5 flex items-center justify-center preserve-3d animate-float-3d">
+                    <div class="absolute inset-2 sm:inset-3 rounded-full border border-dashed border-red-400/30 animate-orbit-cw pointer-events-none"></div>
+                    <div class="absolute inset-8 sm:inset-9 rounded-full border border-cyan-400/30 animate-orbit-ccw pointer-events-none"></div>
+                    
+                    <div class="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full border-2 border-red-500/50 animate-radar-wave-1 pointer-events-none"></div>
+                    <div class="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full border-2 border-cyan-400/40 animate-radar-wave-2 pointer-events-none"></div>
+
+                    <div class="relative z-10 w-28 h-28 sm:w-36 sm:h-36 rounded-3xl border-2 flex items-center justify-center animate-lock-defense preserve-3d transition-all duration-500 backdrop-blur-xl">
+                      <i class="fa-solid fa-shield-halved text-4xl sm:text-6xl drop-shadow-[0_0_20px_currentColor] transition-colors duration-500"></i>
+                    </div>
+
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div class="animate-key-attack-outer flex items-center justify-center">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-red-500 to-rose-600 border-2 border-red-300 flex items-center justify-center text-white text-lg sm:text-xl shadow-[0_0_30px_rgba(239,68,68,0.9)] animate-pulse">
+                          <i class="fa-solid fa-key"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Controls & Indicators -->
+      <div class="absolute bottom-4 sm:bottom-6 left-0 right-0 z-20 flex items-center justify-center gap-4 sm:gap-6 w-full pointer-events-auto">
+        <button onclick="prevSlide()" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/20 text-white hover:bg-white/10 active:scale-95 flex items-center justify-center transition cursor-pointer bg-slateDeep/60 backdrop-blur-md" aria-label="Previous Slide"><i class="fa-solid fa-arrow-left text-sm"></i></button>
+        <div class="flex items-center gap-2.5 sm:gap-3 bg-slateDeep/60 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/10" id="carouselDots">
+          <button onclick="goToSlide(0)" class="w-6 sm:w-8 h-2 sm:h-2.5 rounded-full bg-white transition-all cursor-pointer" aria-label="Slide 1"></button>
+          <button onclick="goToSlide(1)" class="w-2.5 sm:w-3 h-2 sm:h-2.5 rounded-full bg-white/30 transition-all cursor-pointer" aria-label="Slide 2"></button>
+          <button onclick="goToSlide(2)" class="w-2.5 sm:w-3 h-2 sm:h-2.5 rounded-full bg-white/30 transition-all cursor-pointer" aria-label="Slide 3"></button>
+        </div>
+        <button onclick="nextSlide()" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/20 text-white hover:bg-white/10 active:scale-95 flex items-center justify-center transition cursor-pointer bg-slateDeep/60 backdrop-blur-md" aria-label="Next Slide"><i class="fa-solid fa-arrow-right text-sm"></i></button>
+      </div>
+
+      <!-- 5-Second Cycle Progress Bar -->
+      <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20 overflow-hidden">
+        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-accentCyan via-accentMint to-accentViolet transition-all ease-linear" style="width: 0%; transition-duration: 5000ms;"></div>
+      </div>
+    </section>
+
+    <!-- About: Who We Are -->
+    <section id="about" class="relative py-20 sm:py-28 bg-gradient-to-b from-slateDeep via-slateMid to-slateDeep overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none z-0">
+        <div class="absolute top-1/4 -right-40 w-96 h-96 rounded-full bg-accentMint/10 blur-[130px]"></div>
+        <div class="absolute bottom-10 -left-40 w-96 h-96 rounded-full bg-accentCyan/10 blur-[130px]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#ffffff05_1px,transparent_1px)] [background-size:24px_24px] opacity-35"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
+          <div class="inline-flex items-center gap-2 rounded-full border border-accentMint/30 bg-accentMint/10 px-3.5 py-1 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-accentMint backdrop-blur-md mb-4 sm:mb-6 shadow-[0_0_15px_rgba(52,211,153,0.2)]">
+            <i class="fa-solid fa-compass text-xs"></i> Who We Are
+          </div>
+          <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.2] sm:leading-[1.15]">
+            <span class="block mb-2 sm:mb-3">PrimeNet Solutions:</span>
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-accentCyan via-sky-300 to-accentViolet drop-shadow-[0_0_30px_rgba(6,182,212,0.35)] pb-1 inline-block">Connecting Vision To Reality</span>
+          </h2>
+          <p class="text-textSub text-sm sm:text-lg lg:text-xl max-w-3xl mx-auto mt-4 sm:mt-6 leading-relaxed">
+            PrimeNet Solutions designs, integrates, and sustains enterprise IT environments throughout the United Arab Emirates. Our capabilities span the entire infrastructure spectrum: structured campus networks, high-density server deployments, certified biometric and surveillance access systems, and round-the-clock preventative AMC maintenance engineered for zero unplanned downtime.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-stretch">
+          <!-- Mission Card -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentCyan/40 via-white/5 to-transparent hover:from-accentCyan/80 transition-all duration-500 flex flex-col">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-xl p-6 sm:p-8 lg:p-10 border border-white/5 flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-accentCyan/10 border border-accentCyan/30 flex items-center justify-center text-accentCyan text-xl sm:text-2xl mb-5 sm:mb-6 group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+                  <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4">Our Core Mission</h3>
+                <p class="text-textSub text-sm sm:base leading-relaxed mb-6">
+                  To provide enterprises, educational institutions, and public sector organizations throughout the Emirates with transparent, future-ready IT infrastructure engineered for maximum uptime, local data residency, and UAE compliance.
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                <span class="text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">UAE Regulatory Ready</span>
+                <span class="text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Certified Engineers</span>
+                <span class="text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Direct Procurement</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vision Card -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentViolet/40 via-white/5 to-transparent hover:from-accentViolet/80 transition-all duration-500 flex flex-col">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-xl p-6 sm:p-8 lg:p-10 border border-white/5 flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-accentViolet/10 border border-accentViolet/30 flex items-center justify-center text-accentViolet text-xl sm:text-2xl mb-5 sm:mb-6 group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+                  <i class="fa-solid fa-eye"></i>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4">Future Vision & Growth</h3>
+                <p class="text-textSub text-sm sm:text-base leading-relaxed mb-6">
+                  To be the foremost trusted advisor and hardware distributor in Sharjah and the Northern Emirates—accelerating commercial digital transformation through tier-1 brand alliances and proactive lifecycle maintenance.
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                <span class="text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Tier-1 Partnerships</span>
+                <span class="text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">24/7 AMC SLA</span>
+                <span class="text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Enterprise AI Ready</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services: Enterprise Capabilities -->
+    <section id="services" class="relative py-20 sm:py-28 bg-slateMid overflow-hidden border-t border-white/5">
+      <div class="absolute inset-0 pointer-events-none z-0">
+        <div class="absolute top-1/3 -left-48 w-96 h-96 rounded-full bg-accentCyan/15 blur-[140px]"></div>
+        <div class="absolute bottom-10 right-0 w-96 h-96 rounded-full bg-accentViolet/15 blur-[140px]"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <!-- Elevated Services Header Section -->
+        <div class="relative text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+          <!-- Ambient Glow Backdrop -->
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-96 h-28 sm:h-36 bg-amber-500/15 blur-3xl pointer-events-none rounded-full"></div>
+
+          <!-- Microchip Pill Badge with pulse status -->
+          <div class="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-gradient-to-r from-amber-500/15 via-amber-400/10 to-amber-500/5 px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-amber-300 backdrop-blur-xl mb-4 sm:mb-5 shadow-[0_0_20px_rgba(245,158,11,0.22)]">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
+            </span>
+            <i class="fa-solid fa-microchip text-[11px] text-amber-300"></i>
+            <span class="font-mono font-bold tracking-widest">Enterprise Capabilities</span>
+          </div>
+
+          <!-- Main Heading with multi-tone gradient & typography polish -->
+          <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
+            Our <span class="relative inline-block bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 drop-shadow-[0_0_35px_rgba(245,158,11,0.45)]">
+              Services
+              <!-- Subtle decorative gradient underline glow -->
+              <span class="absolute left-0 right-0 -bottom-1 h-[2px] bg-gradient-to-r from-transparent via-amber-400/70 to-transparent"></span>
+            </span>
+          </h2>
+
+          <!-- Descriptive Subtitle with refined typography -->
+          <p class="text-textSub text-sm sm:text-base md:text-lg mt-4 sm:mt-5 max-w-2xl mx-auto leading-relaxed font-normal">
+            End-to-end technology solutions tailored for UAE businesses, government mandates, and rigorous regulatory standards.
+          </p>
+
+          <!-- UAE Trust & Compliance Micro Badges -->
+          <div class="flex items-center justify-center gap-3 sm:gap-4 mt-6 pt-2 text-[11px] sm:text-xs font-mono text-textSub/75">
+            <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-shield text-amber-400 text-[10px]"></i> SIRA Certified</span>
+            <span class="w-1 h-1 rounded-full bg-white/20"></span>
+            <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-bolt text-accentCyan text-[10px]"></i> 24/7 SLA Backing</span>
+            <span class="w-1 h-1 rounded-full bg-white/20"></span>
+            <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-emerald-400 text-[10px]"></i> UAE On-Soil Data</span>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Service 1 -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentCyan/40 via-white/5 to-transparent hover:from-accentCyan/80 hover:shadow-[0_20px_50px_rgba(6,182,212,0.25)] transition-all duration-500 flex flex-col justify-between">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5">
+              <div>
+                <div class="flex items-center justify-between mb-5 sm:mb-6">
+                  <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-accentCyan/10 border border-accentCyan/30 flex items-center justify-center text-accentCyan text-xl sm:text-2xl group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+                    <i class="fa-solid fa-network-wired"></i>
+                  </div>
+                  <span class="text-xs font-mono text-textSub/60 uppercase">01 // NET</span>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 group-hover:text-accentCyan transition-colors">Networking & IT Infrastructure</h3>
+                <div class="space-y-3 sm:space-y-4">
+                  <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
+                      <span class="w-2 h-2 rounded-full bg-accentCyan"></span> Core Infrastructure Solutions
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Network design, server/storage systems, structured cabling, and secure data center builds.</p>
+                  </div>
+                  <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
+                      <span class="w-2 h-2 rounded-full bg-accentCyan"></span> Expert Implementation & AMC
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Site surveys, hardware configuration, and 24/7 Annual Maintenance Contracts.</p>
+                  </div>
+                  <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
+                      <span class="w-2 h-2 rounded-full bg-accentCyan"></span> Compliance & Integration
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Engineered to meet strict UAE communications and data integrity requirements.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-5 sm:pt-6 border-t border-white/5 mt-6 sm:mt-8 flex items-center justify-between">
+                <button onclick="handleCategoryInquire('Networking & IT Infrastructure')" class="text-xs font-bold text-accentCyan hover:text-white transition-colors flex items-center gap-2 cursor-pointer group/btn">
+                  <span>Explore Infrastructure</span>
+                  <i class="fa-solid fa-arrow-right text-[10px] group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'm%20interested%20in%20Networking%20%26%20IT%20Infrastructure." target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all" title="WhatsApp Inquiry">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentViolet/40 via-white/5 to-transparent hover:from-accentViolet/80 hover:shadow-[0_20px_50px_rgba(139,92,246,0.25)] transition-all duration-500 flex flex-col justify-between">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5">
+              <div>
+                <div class="flex items-center justify-between mb-5 sm:mb-6">
+                  <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-accentViolet/10 border border-accentViolet/30 flex items-center justify-center text-accentViolet text-xl sm:text-2xl group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+                    <i class="fa-solid fa-shield-halved"></i>
+                  </div>
+                  <span class="text-xs font-mono text-textSub/60 uppercase">02 // SEC</span>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 group-hover:text-accentViolet transition-colors">Advanced Security & Biometrics</h3>
+                <div class="space-y-3 sm:space-y-4">
+                  <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
+                      <span class="w-2 h-2 rounded-full bg-accentViolet"></span> Physical & Digital Protection
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">SIRA-ready IP CCTV, perimeter intrusion deterrence, and enterprise firewalling.</p>
+                  </div>
+                  <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
+                      <span class="w-2 h-2 rounded-full bg-accentViolet"></span> Biometric Access Intelligence
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Facial recognition, fingerprint terminals, and speed gates with encrypted audit logs.</p>
+                  </div>
+                  <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
+                      <span class="w-2 h-2 rounded-full bg-accentViolet"></span> Lifecycle Governance & AMC
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Full turnkey integration with ongoing regulatory compliance re-certification support.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-5 sm:pt-6 border-t border-white/5 mt-6 sm:mt-8 flex items-center justify-between">
+                <button onclick="handleCategoryInquire('Advanced Security & Biometrics')" class="text-xs font-bold text-accentViolet hover:text-white transition-colors flex items-center gap-2 cursor-pointer group/btn">
+                  <span>Security Architecture</span>
+                  <i class="fa-solid fa-arrow-right text-[10px] group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'm%20interested%20in%20Advanced%20Security%20%26%20Biometrics." target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all" title="WhatsApp Inquiry">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentMint/40 via-white/5 to-transparent hover:from-accentMint/80 hover:shadow-[0_20px_50px_rgba(52,211,153,0.25)] transition-all duration-500 flex flex-col justify-between">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5">
+              <div>
+                <div class="flex items-center justify-between mb-5 sm:mb-6">
+                  <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-accentMint/10 border border-accentMint/30 flex items-center justify-center text-accentMint text-xl sm:text-2xl group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(52,211,153,0.3)]">
+                    <i class="fa-solid fa-server"></i>
+                  </div>
+                  <span class="text-xs font-mono text-textSub/60 uppercase">03 // STR</span>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 group-hover:text-accentMint transition-colors">Server & Data Storage</h3>
+                <div class="space-y-3 sm:space-y-4">
+                  <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
+                      <span class="w-2 h-2 rounded-full bg-accentMint"></span> Enterprise Compute & Arrays
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Scalable rackmount servers, SAN/NAS enclosures, and NVMe all-flash systems.</p>
+                  </div>
+                  <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
+                      <span class="w-2 h-2 rounded-full bg-accentMint"></span> Data Sovereignty & Backups
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Local UAE storage architectures, automated offsite snapshots, and disaster recovery.</p>
+                  </div>
+                  <div class="p-3 sm:p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
+                      <span class="w-2 h-2 rounded-full bg-accentMint"></span> Hardware Upgrades & Spares
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Certified memory, enterprise disks, and power supplies with rapid dispatch SLAs.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-5 sm:pt-6 border-t border-white/5 mt-6 sm:mt-8 flex items-center justify-between">
+                <button onclick="handleCategoryInquire('Server & Data Storage')" class="text-xs font-bold text-accentMint hover:text-white transition-colors flex items-center gap-2 cursor-pointer group/btn">
+                  <span>Storage Capabilities</span>
+                  <i class="fa-solid fa-arrow-right text-[10px] group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'm%20interested%20in%20Server%20%26%20Data%20Storage." target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all" title="WhatsApp Inquiry">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase: Turnkey Enterprise Implementations -->
+    <section id="showcase" class="relative py-24 sm:py-32 bg-slateDeep overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none z-0">
+        <div class="absolute top-1/4 -left-48 w-96 h-96 rounded-full bg-accentCyan/15 blur-[130px]"></div>
+        <div class="absolute bottom-1/4 -right-48 w-96 h-96 rounded-full bg-accentViolet/15 blur-[130px]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#ffffff05_1px,transparent_1px)] [background-size:24px_24px] opacity-40"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 sm:mb-20">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-accentCyan/30 bg-accentCyan/10 px-3.5 py-1 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-accentCyan backdrop-blur-md mb-3 sm:mb-4 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+              <i class="fa-solid fa-cube text-xs"></i> Turnkey Enterprise Implementations
+            </div>
+            <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+              Project <span class="bg-clip-text text-transparent bg-gradient-to-r from-accentCyan via-cyan-200 to-accentViolet drop-shadow-[0_0_30px_rgba(6,182,212,0.35)]">Showcase</span>
+            </h2>
+            <p class="text-textSub text-sm sm:text-lg max-w-2xl mt-3 sm:mt-4 leading-relaxed">
+              High-performance networking fabrics, biometric access intelligence, and sovereign data systems deployed across UAE corporate and public sector environments.
+            </p>
+          </div>
+
+          <a href="brochure/brochure.pdf" download onclick="showToast('Downloading PrimeNet Solutions Brochure PDF...')" class="group relative inline-flex items-center gap-3 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-accentMint/50 px-5 sm:px-7 py-3 sm:py-4 text-sm font-semibold text-white shadow-xl hover:shadow-[0_0_30px_rgba(52,211,153,0.2)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto justify-center">
+            <span class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-accentMint/10 border border-accentMint/30 flex items-center justify-center text-accentMint group-hover:scale-110 group-hover:bg-accentMint group-hover:text-slateDeep transition-all">
+              <i class="fa-solid fa-file-arrow-down text-sm sm:text-base"></i>
+            </span>
+            <div class="text-left">
+              <div class="text-[10px] sm:text-xs uppercase tracking-wider text-textSub font-mono">Documentation</div>
+              <div class="font-bold text-white group-hover:text-accentMint transition-colors">Download Official Brochure</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Showcase 1 -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentCyan/30 via-white/5 to-transparent hover:from-accentCyan/80 hover:via-accentCyan/30 hover:to-accentCyan/10 transition-all duration-500 flex flex-col">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-5 sm:p-6 flex flex-col justify-between overflow-hidden border border-white/5">
+              <div>
+                <div class="relative aspect-[16/10] overflow-hidden rounded-2xl mb-5 sm:mb-6 border border-white/10 bg-slateDeep">
+                  <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=80" alt="Enterprise network cabling and server patch bays" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 filter contrast-110 brightness-95" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slateDeep via-transparent to-black/30"></div>
+                  <div class="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 inline-flex items-center gap-1.5 rounded-full bg-slateDeep/85 backdrop-blur-md border border-accentCyan/40 px-2.5 sm:px-3 py-1 text-[10px] sm:text-[11px] font-semibold text-accentCyan shadow-lg">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-accentCyan animate-ping"></span>
+                    <span>Active 10G Backbone</span>
+                  </div>
+                  <div class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 text-[9px] sm:text-[10px] font-mono text-white/70 bg-black/50 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md border border-white/10">01 // INFRA</div>
+                </div>
+                <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
+                  <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-accentCyan bg-accentCyan/10 border border-accentCyan/20 px-2.5 sm:px-3 py-0.5 rounded-full">Cat6A / SFP+</span>
+                  <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-300 bg-white/5 border border-white/10 px-2.5 sm:px-3 py-0.5 rounded-full">Data Center</span>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-accentCyan transition-colors">Enterprise Network Architecture</h3>
+                <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">High-throughput campus backbones, redundant switching fabrics, and structured cabling engineered for zero downtime and UAE regulatory compliance.</p>
+              </div>
+              <div class="pt-4 sm:pt-5 border-t border-white/5 flex items-center justify-between gap-3">
+                <button onclick="handleCategoryInquire('Enterprise Network Design')" class="flex items-center gap-2 text-xs font-bold text-white hover:text-accentCyan transition-colors group/btn">
+                  <span>Solution Specs</span>
+                  <i class="fa-solid fa-arrow-right text-[11px] group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'm%20interested%20in%20Enterprise%20Network%20Design." target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all shadow-md" title="Inquire on WhatsApp">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Showcase 2 -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentViolet/30 via-white/5 to-transparent hover:from-accentViolet/80 hover:via-accentViolet/30 hover:to-accentViolet/10 transition-all duration-500 flex flex-col">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-5 sm:p-6 flex flex-col justify-between overflow-hidden border border-white/5">
+              <div>
+                <div class="relative aspect-[16/10] overflow-hidden rounded-2xl mb-5 sm:mb-6 border border-white/10 bg-slateDeep">
+                  <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80" alt="Cyber biometric security scanner visualization" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 filter contrast-115 brightness-95" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slateDeep via-transparent to-black/30"></div>
+                  <div class="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 inline-flex items-center gap-1.5 rounded-full bg-slateDeep/85 backdrop-blur-md border border-accentViolet/40 px-2.5 sm:px-3 py-1 text-[10px] sm:text-[11px] font-semibold text-purple-300 shadow-lg">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-accentViolet animate-ping"></span>
+                    <span>SIRA & Audit Ready</span>
+                  </div>
+                  <div class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 text-[9px] sm:text-[10px] font-mono text-white/70 bg-black/50 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md border border-white/10">02 // ACCESS</div>
+                </div>
+                <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
+                  <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-accentViolet bg-accentViolet/10 border border-accentViolet/20 px-2.5 sm:px-3 py-0.5 rounded-full">Facial AI</span>
+                  <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-300 bg-white/5 border border-white/10 px-2.5 sm:px-3 py-0.5 rounded-full">Speed Gates</span>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-purple-300 transition-colors">Biometric Access Intelligence</h3>
+                <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">Multi-factor biometric validation, speed gate turnstiles, and tamper-proof encrypted audit logging compliant with strict UAE security mandates.</p>
+              </div>
+              <div class="pt-4 sm:pt-5 border-t border-white/5 flex items-center justify-between gap-3">
+                <button onclick="handleCategoryInquire('Biometric Access Control')" class="flex items-center gap-2 text-xs font-bold text-white hover:text-purple-300 transition-colors group/btn">
+                  <span>Solution Specs</span>
+                  <i class="fa-solid fa-arrow-right text-[11px] group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'm%20interested%20in%20Biometric%20Access%20Control." target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all shadow-md" title="Inquire on WhatsApp">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Showcase 3 -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentMint/30 via-white/5 to-transparent hover:from-accentMint/80 hover:via-accentMint/30 hover:to-accentMint/10 transition-all duration-500 flex flex-col md:col-span-2 lg:col-span-1">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-5 sm:p-6 flex flex-col justify-between overflow-hidden border border-white/5">
+              <div>
+                <div class="relative aspect-[16/10] overflow-hidden rounded-2xl mb-5 sm:mb-6 border border-white/10 bg-slateDeep">
+                  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80" alt="Enterprise data storage server arrays with glowing fiber lines" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 filter contrast-110 brightness-95" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slateDeep via-transparent to-black/30"></div>
+                  <div class="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 inline-flex items-center gap-1.5 rounded-full bg-slateDeep/85 backdrop-blur-md border border-accentMint/40 px-2.5 sm:px-3 py-1 text-[10px] sm:text-[11px] font-semibold text-accentMint shadow-lg">
+                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-accentMint animate-ping"></span>
+                    <span>Data Sovereignty</span>
+                  </div>
+                  <div class="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 text-[9px] sm:text-[10px] font-mono text-white/70 bg-black/50 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md border border-white/10">03 // STORAGE</div>
+                </div>
+                <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
+                  <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-accentMint bg-accentMint/10 border border-accentMint/20 px-2.5 sm:px-3 py-0.5 rounded-full">All-Flash NVMe</span>
+                  <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-300 bg-white/5 border border-white/10 px-2.5 sm:px-3 py-0.5 rounded-full">Tier-3 SAN</span>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-accentMint transition-colors">Enterprise Compute & Storage Arrays</h3>
+                <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">Resilient SAN/NAS architectures, automated failover clustering, and local storage arrays built to satisfy strict on-soil data residency regulations.</p>
+              </div>
+              <div class="pt-4 sm:pt-5 border-t border-white/5 flex items-center justify-between gap-3">
+                <button onclick="handleCategoryInquire('Enterprise Data Solutions')" class="flex items-center gap-2 text-xs font-bold text-white hover:text-accentMint transition-colors group/btn">
+                  <span>Solution Specs</span>
+                  <i class="fa-solid fa-arrow-right text-[11px] group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'm%20interested%20in%20Enterprise%20Data%20Solutions." target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all shadow-md" title="Inquire on WhatsApp">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Categories: Wholesale Catalog -->
+    <section id="product-categories" class="relative py-20 sm:py-28 bg-slateMid border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div class="inline-flex items-center gap-2 rounded-full border border-rose-500/30 bg-rose-500/10 px-3.5 py-1 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-rose-300 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(244,63,94,0.2)]">
+            <i class="fa-solid fa-boxes-stacked text-xs"></i> PRODUCT CATALOG
+          </div>
+          <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-3 sm:mb-4">
+            Product <span class="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-pink-200 to-accentViolet drop-shadow-[0_0_30px_rgba(244,63,94,0.35)]">Categories</span>
+          </h2>
+          <p class="text-textSub text-sm sm:text-lg lg:text-xl">Extensive range of wholesale IT and specialized equipment supplied across Sharjah, Dubai, and the UAE.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Category 1 -->
+          <div class="bg-slateCard/80 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover:border-accentCyan/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-5 sm:mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accentCyan to-blue-600 flex items-center justify-center text-white text-xl shadow-lg"><i class="fa-solid fa-computer"></i></div>
+                <span class="text-[11px] font-bold uppercase tracking-widest text-accentCyan bg-accentCyan/10 px-3 py-1 rounded-full border border-accentCyan/20">HARDWARE</span>
+              </div>
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-accentCyan transition-colors">Computers & Servers</h3>
+              <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-6">Workstations &bull; Enterprise Rack Servers &bull; Laptops &bull; Peripherals</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5 sm:gap-3 pt-2">
+              <button type="button" onclick="handleCategoryInquire('Computers & Servers')" class="rounded-xl bg-white/5 border border-white/10 hover:bg-accentCyan hover:text-slateDeep font-semibold text-white py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer active:scale-95">
+                <span>Inquire</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'd%20like%20to%20inquire%20about%20Computers%20%26%20Servers." target="_blank" rel="noopener noreferrer" class="rounded-xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500 text-emerald-300 hover:text-white font-semibold py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm active:scale-95">
+                <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i> <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="bg-slateCard/80 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover:border-accentViolet/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-5 sm:mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accentViolet to-fuchsia-600 flex items-center justify-center text-white text-xl shadow-lg"><i class="fa-solid fa-network-wired"></i></div>
+                <span class="text-[11px] font-bold uppercase tracking-widest text-accentViolet bg-accentViolet/10 px-3 py-1 rounded-full border border-accentViolet/20">Infrastructure</span>
+              </div>
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-accentViolet transition-colors">Networking Gear</h3>
+              <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-6">Fibre-Optics &bull; Managed Switches &bull; Routers &bull; Patch Cords</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5 sm:gap-3 pt-2">
+              <button type="button" onclick="handleCategoryInquire('Networking Gear')" class="rounded-xl bg-white/5 border border-white/10 hover:bg-accentViolet hover:text-white font-semibold text-white py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer active:scale-95">
+                <span>Inquire</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'd%20like%20to%20inquire%20about%20Networking%20Gear." target="_blank" rel="noopener noreferrer" class="rounded-xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500 text-emerald-300 hover:text-white font-semibold py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm active:scale-95">
+                <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i> <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="bg-slateCard/80 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover:border-accentMint/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-5 sm:mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accentMint to-emerald-700 flex items-center justify-center text-white text-xl shadow-lg"><i class="fa-solid fa-print"></i></div>
+                <span class="text-[11px] font-bold uppercase tracking-widest text-accentMint bg-accentMint/10 px-3 py-1 rounded-full border border-accentMint/20">Industrial</span>
+              </div>
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-accentMint transition-colors">Specialized Equipment</h3>
+              <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-6">Engineering Drawing &bull; Industrial Plotters &bull; Printing Press Machinery</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5 sm:gap-3 pt-2">
+              <button type="button" onclick="handleCategoryInquire('Specialized Equipment')" class="rounded-xl bg-white/5 border border-white/10 hover:bg-accentMint hover:text-slateDeep font-semibold text-white py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer active:scale-95">
+                <span>Inquire</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'd%20like%20to%20inquire%20about%20Specialized%20Equipment." target="_blank" rel="noopener noreferrer" class="rounded-xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500 text-emerald-300 hover:text-white font-semibold py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm active:scale-95">
+                <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i> <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="bg-slateCard/80 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover:border-amber-400/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-5 sm:mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-xl shadow-lg"><i class="fa-solid fa-shield-halved"></i></div>
+                <span class="text-[11px] font-bold uppercase tracking-widest text-amber-300 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">SURVEILLANCE</span>
+              </div>
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-amber-300 transition-colors">Security Systems</h3>
+              <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-6">Encryption Hardware &bull; IP CCTV Surveillance &bull; Biometric Access Controls</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5 sm:gap-3 pt-2">
+              <button type="button" onclick="handleCategoryInquire('Security Systems')" class="rounded-xl bg-white/5 border border-white/10 hover:bg-amber-500 hover:text-white font-semibold text-white py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer active:scale-95">
+                <span>Inquire</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'd%20like%20to%20inquire%20about%20Security%20Systems." target="_blank" rel="noopener noreferrer" class="rounded-xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500 text-emerald-300 hover:text-white font-semibold py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm active:scale-95">
+                <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i> <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Category 5 -->
+          <div class="bg-slateCard/80 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover:border-blue-400/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-5 sm:mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xl shadow-lg"><i class="fa-solid fa-compact-disc"></i></div>
+                <span class="text-[11px] font-bold uppercase tracking-widest text-blue-300 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Software</span>
+              </div>
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-blue-300 transition-colors">Software & Licenses</h3>
+              <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-6">O.S & Server Licenses &bull; Microsoft 365 &bull; Enterprise Antivirus & Firewall</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5 sm:gap-3 pt-2">
+              <button type="button" onclick="handleCategoryInquire('Software & Licenses')" class="rounded-xl bg-white/5 border border-white/10 hover:bg-blue-500 hover:text-white font-semibold text-white py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer active:scale-95">
+                <span>Inquire</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'd%20like%20to%20inquire%20about%20Software%20%26%20Licenses." target="_blank" rel="noopener noreferrer" class="rounded-xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500 text-emerald-300 hover:text-white font-semibold py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm active:scale-95">
+                <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i> <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Category 6 -->
+          <div class="bg-slateCard/80 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover:border-rose-400/40 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-5 sm:mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white text-xl shadow-lg"><i class="fa-solid fa-fax"></i></div>
+                <span class="text-[11px] font-bold uppercase tracking-widest text-rose-300 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">PRODUCTIVITY</span>
+              </div>
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-rose-300 transition-colors">Office Automation</h3>
+              <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-6">Commercial Photocopiers &bull; Heavy-Duty MFP Printers &bull; High-Speed Document Scanners</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5 sm:gap-3 pt-2">
+              <button type="button" onclick="handleCategoryInquire('Office Automation')" class="rounded-xl bg-white/5 border border-white/10 hover:bg-rose-500 hover:text-white font-semibold text-white py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer active:scale-95">
+                <span>Inquire</span> <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+              <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20I'd%20like%20to%20inquire%20about%20Office%20Automation." target="_blank" rel="noopener noreferrer" class="rounded-xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500 text-emerald-300 hover:text-white font-semibold py-3 text-xs sm:text-sm transition flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm active:scale-95">
+                <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i> <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="relative py-20 sm:py-28 bg-slateDeep overflow-hidden border-t border-white/5">
+      <div class="absolute inset-0 pointer-events-none z-0">
+        <div class="absolute top-1/3 -right-40 w-96 h-96 rounded-full bg-sky-500/15 blur-[140px]"></div>
+        <div class="absolute -bottom-20 left-10 w-96 h-96 rounded-full bg-accentViolet/15 blur-[140px]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#ffffff05_1px,transparent_1px)] [background-size:24px_24px] opacity-35"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 sm:mb-16">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-3.5 py-1 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-sky-400 backdrop-blur-md mb-3 sm:mb-4 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+              <i class="fa-solid fa-user-plus text-xs"></i> Join Our UAE Team
+            </div>
+            <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+              Build Your <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-cyan-200 to-accentViolet drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]">Career</span> With Us
+            </h2>
+            <p class="text-textSub text-sm sm:text-lg max-w-2xl mt-3 sm:mt-4 leading-relaxed">
+              Be part of the forward-thinking engineering and integration force powering high-impact IT and security infrastructures across the United Arab Emirates.
+            </p>
+          </div>
+
+          <div class="flex items-center">
+            <button onclick="handleCareerApply('General Application')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/10 hover:border-sky-400/50 hover:bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition-all cursor-pointer shadow-lg active:scale-95">
+              <i class="fa-solid fa-paper-plane text-sky-400"></i>
+              <span>Drop General CV</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-14">
+          <!-- Role 1 -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-sky-400/30 via-white/5 to-transparent hover:from-sky-400/80 hover:via-sky-400/30 transition-all duration-500 flex flex-col justify-between">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-6 sm:p-7 flex flex-col justify-between border border-white/5">
+              <div>
+                <div class="flex items-center justify-between mb-4 sm:mb-5">
+                  <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400">
+                    Full-Time &bull; Sharjah / Dubai
+                  </span>
+                  <span class="text-xs text-textSub/60 font-mono">ENG // 01</span>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-sky-300 transition-colors">
+                  Network & Systems Engineer
+                </h3>
+                <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
+                  Deploy and configure enterprise Cisco/Fortinet switches, routers, VLAN topologies, and server room infrastructure across client sites in the UAE.
+                </p>
+                <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-5 sm:mb-6">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">CCNA / CCNP</span>
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">VLAN & Routing</span>
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">UAE Driving License</span>
+                </div>
+              </div>
+              <div class="pt-4 sm:pt-5 border-t border-white/5 flex items-center justify-between">
+                <button type="button" onclick="handleCareerApply('Network & Systems Engineer')" class="text-xs sm:text-sm font-bold text-sky-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 sm:gap-2 group/btn">
+                  <span>Apply Now</span>
+                  <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/971526081576?text=Hello%20PrimeNet%20HR,%20I'm%20applying%20for%20the%20Network%20%26%20Systems%20Engineer%20role." target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all shadow-sm" title="Apply via WhatsApp HR">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Role 2 -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentViolet/30 via-white/5 to-transparent hover:from-accentViolet/80 hover:via-accentViolet/30 transition-all duration-500 flex flex-col justify-between">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-6 sm:p-7 flex flex-col justify-between border border-white/5">
+              <div>
+                <div class="flex items-center justify-between mb-4 sm:mb-5">
+                  <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-accentViolet/10 border border-accentViolet/30 text-accentViolet">
+                    Full-Time &bull; UAE On-site
+                  </span>
+                  <span class="text-xs text-textSub/60 font-mono">SEC // 02</span>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                  ELV / CCTV & Security Technician
+                </h3>
+                <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
+                  Installation, cabling, and calibration of SIRA-compliant IP CCTV, biometric access speed gates, and central surveillance control stations.
+                </p>
+                <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-5 sm:mb-6">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Hikvision / Dahua</span>
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Biometrics / ZKTeco</span>
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">SIRA Familiarity</span>
+                </div>
+              </div>
+              <div class="pt-4 sm:pt-5 border-t border-white/5 flex items-center justify-between">
+                <button type="button" onclick="handleCareerApply('ELV / CCTV & Security Technician')" class="text-xs sm:text-sm font-bold text-accentViolet hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 sm:gap-2 group/btn">
+                  <span>Apply Now</span>
+                  <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/971526081576?text=Hello%20PrimeNet%20HR,%20I'm%20applying%20for%20the%20ELV%20CCTV%20Security%20Technician%20role." target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all shadow-sm" title="Apply via WhatsApp HR">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Role 3 -->
+          <div class="group relative rounded-3xl p-[1px] bg-gradient-to-b from-accentMint/30 via-white/5 to-transparent hover:from-accentMint/80 hover:via-accentMint/30 transition-all duration-500 flex flex-col justify-between md:col-span-2 lg:col-span-1">
+            <div class="relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-6 sm:p-7 flex flex-col justify-between border border-white/5">
+              <div>
+                <div class="flex items-center justify-between mb-4 sm:mb-5">
+                  <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-accentMint/10 border border-accentMint/30 text-accentMint">
+                    Full-Time &bull; B2B Wholesale
+                  </span>
+                  <span class="text-xs text-textSub/60 font-mono">SLS // 03</span>
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-accentMint transition-colors">
+                  IT Hardware Sales Executive
+                </h3>
+                <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6">
+                  Drive B2B enterprise procurement, bulk hardware distribution, and client relationships across servers, laptops, and networking products in the Emirates.
+                </p>
+                <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-5 sm:mb-6">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">B2B IT Sales</span>
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Client Portfolio</span>
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300">Negotiation</span>
+                </div>
+              </div>
+              <div class="pt-4 sm:pt-5 border-t border-white/5 flex items-center justify-between">
+                <button type="button" onclick="handleCareerApply('IT Hardware Sales Executive')" class="text-xs sm:text-sm font-bold text-accentMint hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 sm:gap-2 group/btn">
+                  <span>Apply Now</span>
+                  <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/971526081576?text=Hello%20PrimeNet%20HR,%20I'm%20applying%20for%20the%20IT%20Hardware%20Sales%20Executive%20role." target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all shadow-sm" title="Apply via WhatsApp HR">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Culture & Benefits Banner -->
+        <div class="rounded-3xl bg-slateCard/80 border border-white/10 p-6 sm:p-8 lg:p-10 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
+          <div class="space-y-2 max-w-xl text-center md:text-left">
+            <h4 class="text-lg sm:text-xl md:text-2xl font-bold text-white">Why grow your career with PrimeNet Solutions?</h4>
+            <p class="text-textSub text-xs sm:text-sm leading-relaxed">
+              Work alongside certified enterprise architects, access cutting-edge tier-1 brand certifications (Cisco, Hikvision, Microsoft), and enjoy competitive UAE compensation packages.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+            <div class="flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl bg-white/5 border border-white/10 text-xs font-semibold text-white">
+              <i class="fa-solid fa-certificate text-accentCyan"></i> Tier-1 Training
+            </div>
+            <div class="flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl bg-white/5 border border-white/10 text-xs font-semibold text-white">
+              <i class="fa-solid fa-chart-line text-accentMint"></i> Fast Progression
+            </div>
+            <div class="flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl bg-white/5 border border-white/10 text-xs font-semibold text-white">
+              <i class="fa-solid fa-award text-amber-400"></i> UAE Market Impact
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="relative py-20 sm:py-28 bg-gradient-to-b from-slateMid to-slateDeep overflow-hidden">
+      <div class="absolute top-0 right-0 w-[50vw] h-[50vw] rounded-full bg-accentViolet/20 blur-[120px] -translate-y-1/3 translate-x-1/4"></div>
+      <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-10 text-center">
+        <h2 class="font-display text-3xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6">Let's build something remarkable.</h2>
+        <p class="text-textSub text-sm sm:text-lg mb-8 sm:mb-10 max-w-xl mx-auto">Reach out for a project estimate, collaboration, or just to say hello.</p>
+        <button onclick="openModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-accentCyan to-accentViolet px-8 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl font-bold text-white shadow-2xl shadow-accentCyan/20 hover:shadow-accentCyan/40 active:scale-95 transition-all border-0 cursor-pointer">
+          <i class="fa-solid fa-paper-plane text-base sm:text-lg"></i>
+          <span>Start a Conversation</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Brand Partners -->
+  <section class="relative py-16 sm:py-20 bg-slateMid border-t border-white/5 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mb-6 sm:mb-8 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-accentCyan backdrop-blur-sm mb-3">
+        <i class="fa-solid fa-handshake text-xs"></i> Enterprise Ecosystem
+      </div>
+      <h3 class="text-xl sm:text-2xl md:text-3xl font-display font-extrabold text-white">Brands We Deal With</h3>
+    </div>
+
+    <div class="brand-marquee-container relative w-full overflow-hidden py-3 sm:py-4">
+      <div class="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-48 bg-gradient-to-r from-slateMid to-transparent z-10"></div>
+      <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-48 bg-gradient-to-l from-slateMid to-transparent z-10"></div>
+
+      <div class="brand-marquee-track gap-4 sm:gap-6 md:gap-8 items-center px-4">
+        <!-- Set 1 -->
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-slate-200">CISCO</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-red-400">HIKVISION</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-blue-400">EPSON</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-cyan-400">D-LINK</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-red-500">CANON</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-emerald-400">MICROSOFT</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-amber-400">LENOVO</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-blue-300">DELL</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-violet-400">HP</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-teal-400">FORTINET</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-sky-400">LOGITECH</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-yellow-400">ZEBRA</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-emerald-300">ZKTECO</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-rose-400">CP PLUS</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-red-500">DAHUA</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-red-400">3M</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-blue-400">SAMSUNG</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-emerald-400">TP-LINK</span>
+        </div>
+
+        <!-- Set 2 -->
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-slate-200">CISCO</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-red-400">HIKVISION</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-blue-400">EPSON</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-cyan-400">D-LINK</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-red-500">CANON</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-emerald-400">MICROSOFT</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-amber-400">LENOVO</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-blue-300">DELL</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-violet-400">HP</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-teal-400">FORTINET</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-sky-400">LOGITECH</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-yellow-400">ZEBRA</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-emerald-300">ZKTECO</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-rose-400">CP PLUS</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-red-500">DAHUA</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-red-400">3M</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-blue-400">SAMSUNG</span>
+        </div>
+        <div class="brand-logo-card flex items-center justify-center min-w-[130px] sm:min-w-[150px] md:min-w-[170px] h-14 sm:h-16 px-4 sm:px-6 rounded-2xl bg-slateCard/90 border border-white/10 shadow-lg backdrop-blur-sm">
+          <span class="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-emerald-400">TP-LINK</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Follow Us & Location Map Section -->
+  <section class="relative py-16 sm:py-20 bg-slateDeep border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-6 sm:gap-10 items-stretch">
+        <!-- Follow Us Card -->
+        <div class="h-full bg-slateCard/80 border border-white/5 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl backdrop-blur-sm flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-accentCyan/30 bg-accentCyan/10 px-3.5 py-1 text-[11px] sm:text-xs font-semibold text-accentCyan backdrop-blur-sm mb-4 sm:mb-5">
+              <i class="fa-solid fa-share-nodes text-xs"></i> Connect With Us
+            </div>
+            <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white mb-3 sm:mb-4">Follow Us</h3>
+            <p class="text-textSub text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8">Stay updated on our latest technology solutions, hardware arrivals, and enterprise security insights across the UAE.</p>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3.5 pt-2">
+            <a href="https://linkedin.com/in/primenet-solutions-a11105448" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/10 hover:border-accentCyan px-3 sm:px-4 py-3 sm:py-3.5 text-white hover:text-accentCyan transition-all font-semibold text-xs sm:text-sm group active:scale-95">
+              <i class="fa-brands fa-linkedin-in text-base sm:text-lg text-accentCyan group-hover:scale-110 transition-transform"></i> LinkedIn
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500 px-3 sm:px-4 py-3 sm:py-3.5 text-white hover:text-blue-400 transition-all font-semibold text-xs sm:text-sm group active:scale-95">
+              <i class="fa-brands fa-facebook-f text-base sm:text-lg text-blue-400 group-hover:scale-110 transition-transform"></i> Facebook
+            </a>
+            <a href="https://www.instagram.com/primenetsolutions?cplk=OGxjazNjZzBpZmxs" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/10 hover:border-accentViolet px-3 sm:px-4 py-3 sm:py-3.5 text-white hover:text-accentViolet transition-all font-semibold text-xs sm:text-sm group active:scale-95">
+              <i class="fa-brands fa-instagram text-base sm:text-lg text-accentViolet group-hover:scale-110 transition-transform"></i> Instagram
+            </a>
+            <a href="https://x.com/PrimeNetUAE" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/10 hover:border-accentMint px-3 sm:px-4 py-3 sm:py-3.5 text-white hover:text-accentMint transition-all font-semibold text-xs sm:text-sm group active:scale-95">
+              <i class="fa-brands fa-x-twitter text-base sm:text-lg text-accentMint group-hover:scale-110 transition-transform"></i> Twitter (X)
+            </a>
+            <a href="https://wa.me/971526081576" target="_blank" rel="noopener noreferrer" class="col-span-2 sm:col-span-2 flex items-center justify-center gap-2 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500 px-4 py-3 sm:py-3.5 text-emerald-300 hover:text-white transition-all font-semibold text-xs sm:text-sm group shadow-sm active:scale-95">
+              <i class="fa-brands fa-whatsapp text-base sm:text-lg text-emerald-400 group-hover:text-white group-hover:scale-110 transition-all"></i> Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Location Map Card -->
+        <div class="h-full bg-slateCard/80 border border-white/5 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl backdrop-blur-sm flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-accentMint/30 bg-accentMint/10 px-3.5 py-1 text-[11px] sm:text-xs font-semibold text-accentMint backdrop-blur-sm mb-4 sm:mb-5">
+              <i class="fa-solid fa-location-dot text-xs"></i> Our Headquarters
+            </div>
+            <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white mb-2">Location</h3>
+            <p class="text-accentCyan font-semibold text-xs sm:text-sm mb-5 sm:mb-6 flex items-center gap-2">
+              <i class="fa-solid fa-map-pin text-accentMint"></i> 8F95+XC - Sharjah, UAE (Business Centre, SPC FZC)
+            </p>
+          </div>
+          <div class="relative w-full h-48 sm:h-56 md:h-64 rounded-2xl overflow-hidden border border-white/10 shadow-inner bg-slateMid">
+            <iframe 
+              title="PrimeNet Solutions Sharjah Location"
+              src="https://maps.google.com/maps?q=Sharjah+Publishing+City+Free+Zone&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              class="w-full h-full filter contrast-125 opacity-90 hover:opacity-100 transition duration-300">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="site-footer" class="bg-slateDeep border-t border-white/5 pt-12 sm:pt-16 pb-8 safe-bottom">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-10 sm:mb-12">
+        <div class="sm:col-span-2">
+          <a href="#" class="inline-block mb-4 sm:mb-5" aria-label="PrimeNet Home">
+            <img src="logo/PNS_Logo.png" alt="PrimeNet Solutions FZC" class="h-10 sm:h-12 w-auto object-contain drop-shadow-[0_0_18px_rgba(6,182,212,0.3)]" />
+          </a>
+          <p class="text-textSub text-xs sm:text-sm max-w-sm mb-4 leading-relaxed">PrimeNet Solutions FZC — Sharjah-based enterprise technology integrator. We design, deploy, and maintain robust networking, security systems, biometrics, and server infrastructure with full UAE regulatory compliance.</p>
+          <div class="text-xs sm:text-sm text-textSub space-y-1.5">
+            <p><i class="fa-solid fa-phone text-accentCyan w-5"></i> +971 52 6081576</p>
+            <p><i class="fa-solid fa-phone text-accentCyan w-5"></i> +971 52 699 8801</p>
+            <p><i class="fa-solid fa-envelope text-accentCyan w-5"></i> info@primenetsolutions.ae</p>
+            <p><i class="fa-solid fa-location-dot text-accentCyan w-5"></i> Business Centre, SPC FZC, Sharjah, UAE</p>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-white text-sm sm:text-base mb-3 sm:mb-4">Navigation</h4>
+          <ul class="flex flex-col gap-2 text-textSub text-xs sm:text-sm">
+            <li><a href="#hero" class="hover:text-white transition">Home</a></li>
+            <li><a href="#about" class="hover:text-white transition">About</a></li>
+            <li><a href="#services" class="hover:text-white transition">Services</a></li>
+            <li><a href="#product-categories" class="hover:text-white transition">Products</a></li>
+            <li><a href="#careers" class="hover:text-white transition">Careers</a></li>
+            <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display font-bold text-white text-sm sm:text-base mb-3 sm:mb-4">Social</h4>
+          <ul class="flex flex-col gap-2 text-textSub text-xs sm:text-sm">
+            <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="Facebook"><i class="fa-brands fa-facebook-f w-5"></i> Facebook</a></li>
+            <li><a href="https://www.instagram.com/primenetsolutions?cplk=OGxjazNjZzBpZmxs" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="Instagram"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
+            <li><a href="https://linkedin.com/in/primenet-solutions-a11105448" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in w-5"></i> LinkedIn</a></li>
+            <li><a href="https://x.com/PrimeNetUAE" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" aria-label="Twitter"><i class="fa-brands fa-x-twitter w-5"></i> Twitter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 sm:pt-8 border-t border-white/5 text-xs text-textSub/60 text-center sm:text-left">
+        <p>&copy; 2026 PrimeNet Solutions FZC. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white">Privacy</a>
+          <a href="#" class="hover:text-white">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-5 left-4 right-4 sm:left-5 sm:right-auto z-50 transform -translate-y-20 opacity-0 pointer-events-none transition-all duration-300 bg-slate-900/95 backdrop-blur-xl text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 border border-slate-700 max-w-sm">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+    <span id="toast-message" class="text-xs sm:text-sm font-medium">Action completed successfully!</span>
+  </div>
+
+  <!-- Premium Scroll Sound Toggle -->
+  <button id="soundToggle" onclick="toggleScrollSound()" class="sound-toggle fixed bottom-24 sm:bottom-28 left-4 sm:left-6 z-40 group flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/75 backdrop-blur-xl px-3 sm:px-3.5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-semibold text-textSub shadow-lg shadow-black/40 hover:border-accentCyan/40 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accentCyan/60 transition-all duration-300 cursor-pointer" aria-pressed="true" aria-label="Toggle mouse wheel scroll sound" title="Mouse wheel scroll sound">
+    <span class="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
+      <span id="soundPulse" class="absolute inline-flex h-full w-full rounded-full bg-accentMint opacity-75 animate-ping"></span>
+      <span id="soundDot" class="relative inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-accentMint"></span>
+    </span>
+    <i id="soundIcon" class="fa-solid fa-volume-high text-accentCyan text-xs sm:text-sm transition-transform duration-300 group-hover:scale-110"></i>
+    <span id="soundLabel">Sound On</span>
+  </button>
+
+  <!-- Modal -->
+  <div id="contactModal" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="absolute inset-0 bg-black/75 backdrop-blur-md" onclick="closeModal()"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] sm:w-full max-w-md">
+      <div class="bg-slateMid border border-white/10 rounded-3xl shadow-2xl p-6 sm:p-8 relative max-h-[88vh] overflow-y-auto">
+        <button onclick="closeModal()" class="absolute top-4 right-4 p-2 text-textSub hover:text-white transition bg-transparent border-0 cursor-pointer" aria-label="Close modal"><i class="fa-solid fa-xmark text-lg sm:text-xl"></i></button>
+        <h3 id="modalTitle" class="font-display text-xl sm:text-2xl font-extrabold text-white mb-1.5">Get in Touch</h3>
+        <p class="text-textSub text-xs sm:text-sm mb-4 sm:mb-5">Drop your details or chat instantly via WhatsApp.</p>
+        
+        <!-- Instant WhatsApp Shortcut inside Modal -->
+        <a id="modalWhatsAppBtn" href="https://wa.me/971526081576?text=Hello%20PrimeNet%20Solutions,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" class="mb-4 w-full flex items-center justify-center gap-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 hover:bg-emerald-500 text-emerald-300 hover:text-white py-2.5 sm:py-3 text-xs sm:text-sm font-bold transition shadow-sm active:scale-95">
+          <i class="fa-brands fa-whatsapp text-base"></i> Instant WhatsApp Inquiry
+        </a>
+
+        <div class="relative flex items-center justify-center mb-4">
+          <div class="border-t border-white/10 w-full"></div>
+          <span class="bg-slateMid px-3 text-[10px] sm:text-xs uppercase font-semibold text-textSub/60 absolute">Or Send Email</span>
+        </div>
+
+        <form onsubmit="event.preventDefault(); submitForm();" class="flex flex-col gap-3.5 sm:gap-4" novalidate>
+          <div>
+            <label for="modalName" class="block text-[11px] font-semibold text-textSub uppercase tracking-wider mb-1">Name</label>
+            <input id="modalName" type="text" autocomplete="name" placeholder="Your Name" required class="w-full rounded-xl bg-slateCard border border-white/10 px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-textSub/60 focus:outline-none focus:ring-2 focus:ring-accentCyan/40 transition" />
+          </div>
+          <div>
+            <label for="modalEmail" class="block text-[11px] font-semibold text-textSub uppercase tracking-wider mb-1">Email</label>
+            <input id="modalEmail" type="email" autocomplete="email" placeholder="your@email.com" required class="w-full rounded-xl bg-slateCard border border-white/10 px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-textSub/60 focus:outline-none focus:ring-2 focus:ring-accentCyan/40 transition" />
+          </div>
+          <div>
+            <label for="modalPhone" class="block text-[11px] font-semibold text-textSub uppercase tracking-wider mb-1">Phone</label>
+            <input id="modalPhone" type="tel" autocomplete="tel" placeholder="+971 50 123 4567" required class="w-full rounded-xl bg-slateCard border border-white/10 px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-textSub/60 focus:outline-none focus:ring-2 focus:ring-accentCyan/40 transition" />
+          </div>
+
+          <!-- File Attachment Container -->
+          <div id="fileUploadContainer" class="w-full">
+            <label for="modalFile" class="block text-[11px] font-semibold text-textSub uppercase tracking-wider mb-1 flex items-center justify-between">
+              <span id="fileLabelTitle">Attach CV / Document</span>
+              <span class="text-[9px] text-textSub/60 font-mono">&le;10MB (PDF/DOC)</span>
+            </label>
+            <div class="relative group">
+              <input id="modalFile" type="file" accept=".pdf,.doc,.docx" onchange="handleFileSelected(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+              <div id="fileDropArea" class="w-full rounded-xl bg-slateCard border border-dashed border-white/20 px-3.5 py-3 flex items-center justify-between group-hover:border-accentCyan/60 transition bg-white/[0.02]">
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                  <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 shrink-0">
+                    <i id="fileUploadIcon" class="fa-solid fa-cloud-arrow-up text-xs sm:text-sm"></i>
+                  </div>
+                  <div class="text-left overflow-hidden">
+                    <p id="fileNameDisplay" class="text-xs text-textSub font-medium truncate max-w-[170px] xs:max-w-[210px] sm:max-w-[240px]">Click to attach file (PDF/DOC)</p>
+                    <span id="fileSizeDisplay" class="text-[10px] text-textSub/50 hidden">0 KB</span>
+                  </div>
+                </div>
+                <button type="button" id="clearFileBtn" onclick="clearSelectedFile(event)" class="hidden text-textSub/60 hover:text-red-400 p-1 text-xs transition z-20" title="Remove file">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="modalMessage" class="block text-[11px] font-semibold text-textSub uppercase tracking-wider mb-1">Message</label>
+            <textarea id="modalMessage" rows="2.5" autocomplete="off" placeholder="How can we help?" required class="w-full rounded-xl bg-slateCard border border-white/10 px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-textSub/60 focus:outline-none focus:ring-2 focus:ring-accentCyan/40 transition resize-none"></textarea>
+          </div>
+          <button type="submit" id="submitBtn" class="w-full rounded-xl bg-gradient-to-r from-accentCyan to-accentViolet px-5 py-3 sm:py-3.5 text-sm sm:text-base font-bold text-white shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2">
+            <span id="submitBtnText">Send Message</span>
+            <i class="fa-solid fa-paper-plane text-xs"></i>
+          </button>
+        </form>
+        <p id="formFeedback" class="mt-3 text-xs sm:text-sm text-accentMint font-medium hidden text-center">Thanks! We'll be in touch soon.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chatbot Widget & Floating Action Cluster -->
+  <div id="chatWidget" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end space-y-2.5 sm:space-y-3">
+    <!-- Chat Window Popup -->
+    <div id="chatWindow" class="hidden mb-2 w-[calc(100vw-2rem)] max-w-[360px] sm:max-w-sm sm:w-96 bg-slateMid/95 backdrop-blur-2xl border border-accentCyan/30 rounded-3xl shadow-[0_0_40px_rgba(6,182,212,0.15)] overflow-hidden transition-all duration-300 origin-bottom-right scale-95 opacity-0">
+      <!-- Chat Header -->
+      <div class="bg-gradient-to-r from-accentCyan via-blue-600 to-accentViolet px-4 py-3 sm:px-5 sm:py-4 flex items-center justify-between shadow-lg">
+        <div class="flex items-center gap-2.5">
+          <div class="relative">
+            <div class="w-2.5 h-2.5 rounded-full bg-accentMint animate-ping absolute inset-0"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-accentMint relative"></div>
+          </div>
+          <div>
+            <h4 class="font-bold text-white text-xs sm:text-sm tracking-wide">PrimeNet AI Assistant</h4>
+            <span class="text-[9px] sm:text-[10px] text-white/80 font-medium">Online | UAE Integrator</span>
+          </div>
+        </div>
+        <button type="button" onclick="toggleChat(event)" class="text-white/80 hover:text-white text-xs bg-white/10 hover:bg-white/20 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition border-0 cursor-pointer" aria-label="Close chat"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Messages Area -->
+      <div id="chatMessages" class="h-68 sm:h-80 overflow-y-auto p-3 sm:p-4 space-y-3 text-xs sm:text-sm scroll-smooth bg-slateDeep/50">
+        <div class="flex items-start gap-2">
+          <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-accentCyan to-accentViolet flex items-center justify-center text-white text-[10px] sm:text-xs shrink-0 shadow">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="bg-slateCard border border-white/5 rounded-2xl rounded-tl-md px-3.5 py-2.5 text-textSub max-w-[85%] shadow-md leading-relaxed">
+            Welcome to PrimeNet Solutions FZC (Sharjah, UAE). How can our team assist with your enterprise networking, security, or IT infrastructure requirements today?
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Chips -->
+      <div class="px-2.5 py-2 flex gap-1.5 flex-wrap bg-slateMid/80 border-t border-white/5">
+        <button type="button" onclick="quickChat('networking', 'topic', event)" data-type="topic" data-key="networking" class="text-[11px] rounded-full border border-accentCyan/30 bg-accentCyan/10 px-2.5 py-1 text-accentCyan hover:bg-accentCyan hover:text-white transition font-medium cursor-pointer">Networking</button>
+        <button type="button" onclick="quickChat('security', 'topic', event)" data-type="topic" data-key="security" class="text-[11px] rounded-full border border-accentViolet/30 bg-accentViolet/10 px-2.5 py-1 text-accentViolet hover:bg-accentViolet hover:text-white transition font-medium cursor-pointer">Security</button>
+        <button type="button" onclick="quickChat('servers', 'topic', event)" data-type="topic" data-key="servers" class="text-[11px] rounded-full border border-accentMint/30 bg-accentMint/10 px-2.5 py-1 text-accentMint hover:bg-accentMint hover:text-slateDeep transition font-medium cursor-pointer">Servers</button>
+        <button type="button" onclick="quickChat('amc', 'topic', event)" data-type="topic" data-key="amc" class="text-[11px] rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-amber-300 hover:bg-amber-400 hover:text-slateDeep transition font-medium cursor-pointer">AMC</button>
+        <button type="button" onclick="quickChat('quote', 'action', event)" data-type="action" data-key="quote" class="text-[11px] rounded-full border border-violet-400/30 bg-violet-400/10 px-2.5 py-1 text-violet-300 hover:bg-violet-400 hover:text-white transition font-medium cursor-pointer">Get Quote</button>
+        <button type="button" onclick="quickChat('specs', 'action', event)" data-type="action" data-key="specs" class="text-[11px] rounded-full border border-rose-400/30 bg-rose-400/10 px-2.5 py-1 text-rose-300 hover:bg-rose-400 hover:text-white transition font-medium cursor-pointer">Specs</button>
+        <button type="button" onclick="quickChat('brochure', 'action', event)" data-type="action" data-key="brochure" class="text-[11px] rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 text-emerald-300 hover:bg-emerald-400 hover:text-white transition font-medium cursor-pointer">Brochure</button>
+      </div>
+
+      <!-- Input Field -->
+      <div class="p-2.5 sm:p-3 border-t border-white/10 bg-slateDeep">
+        <form onsubmit="event.preventDefault(); sendChat();" class="flex gap-2 items-center bg-slateCard border border-white/10 rounded-2xl px-3 py-1 focus-within:border-accentCyan/50 focus-within:ring-2 focus-within:ring-accentCyan/20 transition">
+          <input id="chatInput" type="text" placeholder="Ask about IT, servers, AMC..." class="flex-1 bg-transparent border-0 py-1.5 sm:py-2 text-xs sm:text-sm text-white placeholder:text-textSub/50 focus:outline-none" />
+          <button type="submit" class="w-8 h-8 rounded-xl bg-gradient-to-r from-accentCyan to-accentViolet text-white flex items-center justify-center hover:opacity-90 active:scale-95 transition shadow-md border-0 cursor-pointer" aria-label="Send message"><i class="fa-solid fa-paper-plane text-[10px] sm:text-xs"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <!-- WhatsApp Direct Chat Button -->
+    <a href="https://wa.me/971526081576?text=Hello%20PrimeNet%20Solutions,%20I%20would%20like%20to%20inquire%20about%20your%20IT%20solutions." target="_blank" rel="noopener noreferrer" class="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-500 text-white shadow-[0_0_35px_rgba(16,185,129,0.4)] hover:shadow-[0_0_45px_rgba(16,185,129,0.7)] active:scale-95 transition-all flex items-center justify-center cursor-pointer" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+      <span class="absolute -top-1 -right-1 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-accentMint border-2 border-slateDeep animate-pulse"></span>
+      <i class="fa-brands fa-whatsapp text-xl sm:text-2xl group-hover:rotate-12 transition-transform"></i>
+    </a>
+
+    <!-- Floating Chatbot Trigger Button -->
+    <button type="button" id="chatToggleBtn" onclick="toggleChat(event)" class="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-accentCyan to-accentViolet text-white shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_40px_rgba(139,92,246,0.6)] active:scale-95 transition-all flex items-center justify-center border-0 cursor-pointer" aria-label="Open chat" title="Open AI Assistant">
+      <span class="absolute -top-1 -right-1 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-accentMint border-2 border-slateDeep animate-pulse"></span>
+      <i class="fa-solid fa-robot text-lg sm:text-xl group-hover:rotate-12 transition-transform"></i>
+    </button>
+  </div>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const messageEl = document.getElementById('toast-message');
+      messageEl.textContent = msg;
+      toast.classList.remove('-translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('-translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+
+    let attachedFile = null;
+
+    function handleFileSelected(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (file.size > 10 * 1024 * 1024) {
+        showToast('File exceeds 10MB limit. Please attach a smaller file.');
+        event.target.value = '';
+        return;
+      }
+
+      attachedFile = file;
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      const fileSizeDisplay = document.getElementById('fileSizeDisplay');
+      const fileUploadIcon = document.getElementById('fileUploadIcon');
+      const clearBtn = document.getElementById('clearFileBtn');
+      const dropArea = document.getElementById('fileDropArea');
+
+      if (fileNameDisplay) {
+        fileNameDisplay.textContent = file.name;
+        fileNameDisplay.classList.remove('text-textSub');
+        fileNameDisplay.classList.add('text-sky-300', 'font-semibold');
+      }
+      if (fileSizeDisplay) {
+        const sizeKb = (file.size / 1024).toFixed(1);
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+        fileSizeDisplay.textContent = file.size > 1024 * 1024 ? `${sizeMb} MB` : `${sizeKb} KB`;
+        fileSizeDisplay.classList.remove('hidden');
+      }
+      if (fileUploadIcon) {
+        fileUploadIcon.className = 'fa-solid fa-file-circle-check text-sm text-accentMint';
+      }
+      if (clearBtn) clearBtn.classList.remove('hidden');
+      if (dropArea) {
+        dropArea.classList.add('border-sky-400/60', 'bg-sky-500/5');
+      }
+      showToast(`Attached: ${file.name}`);
+    }
+
+    function clearSelectedFile(event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      attachedFile = null;
+      const fileInput = document.getElementById('modalFile');
+      if (fileInput) fileInput.value = '';
+      
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      const fileSizeDisplay = document.getElementById('fileSizeDisplay');
+      const fileUploadIcon = document.getElementById('fileUploadIcon');
+      const clearBtn = document.getElementById('clearFileBtn');
+      const dropArea = document.getElementById('fileDropArea');
+
+      if (fileNameDisplay) {
+        fileNameDisplay.textContent = 'Click to attach file (PDF/DOC)';
+        fileNameDisplay.classList.add('text-textSub');
+        fileNameDisplay.classList.remove('text-sky-300', 'font-semibold');
+      }
+      if (fileSizeDisplay) fileSizeDisplay.classList.add('hidden');
+      if (fileUploadIcon) {
+        fileUploadIcon.className = 'fa-solid fa-cloud-arrow-up text-sm';
+      }
+      if (clearBtn) clearBtn.classList.add('hidden');
+      if (dropArea) {
+        dropArea.classList.remove('border-sky-400/60', 'bg-sky-500/5');
+      }
+    }
+
+    function handleCategoryInquire(categoryName) {
+      openModal();
+      const modalTitle = document.getElementById('modalTitle');
+      const fileLabelTitle = document.getElementById('fileLabelTitle');
+      const submitBtnText = document.getElementById('submitBtnText');
+      if (modalTitle) modalTitle.textContent = 'Request Quotation';
+      if (fileLabelTitle) fileLabelTitle.textContent = 'Attach Specs (Optional)';
+      if (submitBtnText) submitBtnText.textContent = 'Send Quotation Request';
+
+      const messageInput = document.getElementById('modalMessage');
+      if (messageInput) {
+        messageInput.value = `Hello PrimeNet Team,\n\nI would like to request an official quotation and wholesale details for: ${categoryName}.\n\nPlease get in touch with me.`;
+      }
+      const waModalBtn = document.getElementById('modalWhatsAppBtn');
+      if (waModalBtn) {
+        const textEncoded = encodeURIComponent(`Hello PrimeNet Solutions, I would like to inquire about ${categoryName} wholesale pricing.`);
+        waModalBtn.href = `https://wa.me/971526081576?text=${textEncoded}`;
+      }
+    }
+
+    function handleCareerApply(jobTitle) {
+      openModal();
+      const modalTitle = document.getElementById('modalTitle');
+      const fileLabelTitle = document.getElementById('fileLabelTitle');
+      const submitBtnText = document.getElementById('submitBtnText');
+      
+      if (modalTitle) modalTitle.textContent = `Apply: ${jobTitle}`;
+      if (fileLabelTitle) fileLabelTitle.innerHTML = '<span class="text-sky-400 font-bold">Attach Resume / CV *</span>';
+      if (submitBtnText) submitBtnText.textContent = 'Submit Application';
+
+      const messageInput = document.getElementById('modalMessage');
+      if (messageInput) {
+        if (jobTitle === 'General Application') {
+          messageInput.value = `Hello PrimeNet HR Team,\n\nI am submitting a general application to join PrimeNet Solutions in the UAE. Please find my CV attached with my experience summary.`;
+        } else {
+          messageInput.value = `Hello PrimeNet HR Team,\n\nI would like to apply for the position: ${jobTitle}.\n\nPlease find my contact details above and my CV attached for your review.`;
+        }
+      }
+      const waModalBtn = document.getElementById('modalWhatsAppBtn');
+      if (waModalBtn) {
+        const textEncoded = encodeURIComponent(`Hello PrimeNet HR, I am applying for ${jobTitle} and would like to share my CV.`);
+        waModalBtn.href = `https://wa.me/971526081576?text=${textEncoded}`;
+      }
+    }
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dotsContainer = document.getElementById('carouselDots');
+    const dots = dotsContainer ? dotsContainer.querySelectorAll('button') : [];
+    const progressBar = document.getElementById('slideProgressBar');
+
+    function resetProgressBar() {
+      if (!progressBar) return;
+      progressBar.style.transitionDuration = '0ms';
+      progressBar.style.width = '0%';
+      void progressBar.offsetWidth;
+      progressBar.style.transitionDuration = '5000ms';
+      progressBar.style.width = '100%';
+    }
+
+    function updateCarousel() {
+      slides.forEach((slide, idx) => {
+        if (idx === currentSlide) {
+          slide.classList.remove('opacity-0', 'hidden');
+          slide.classList.add('opacity-100', 'block');
+        } else {
+          slide.classList.remove('opacity-100', 'block');
+          slide.classList.add('opacity-0', 'hidden');
+        }
+      });
+      dots.forEach((dot, idx) => {
+        if (idx === currentSlide) {
+          dot.classList.remove('w-2.5', 'sm:w-3', 'bg-white/30');
+          dot.classList.add('w-6', 'sm:w-8', 'bg-white');
+        } else {
+          dot.classList.remove('w-6', 'sm:w-8', 'bg-white');
+          dot.classList.add('w-2.5', 'sm:w-3', 'bg-white/30');
+        }
+      });
+      resetProgressBar();
+    }
+
+    function resetTimer() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 5000);
+      resetProgressBar();
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateCarousel();
+      resetTimer();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateCarousel();
+      resetTimer();
+    }
+
+    function goToSlide(idx) {
+      currentSlide = idx;
+      updateCarousel();
+      resetTimer();
+    }
+
+    let slideInterval = setInterval(nextSlide, 5000);
+    resetProgressBar();
+
+    const heroSection = document.getElementById('hero');
+    if (heroSection) {
+      let touchStartX = 0;
+      let touchEndX = 0;
+      heroSection.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      heroSection.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) {
+          nextSlide();
+        } else if (touchEndX - touchStartX > 50) {
+          prevSlide();
+        }
+      }, { passive: true });
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.getElementById('menuBtn');
+      if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+        menu.style.maxHeight = '0px';
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      } else {
+        menu.style.maxHeight = menu.scrollHeight + 'px';
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    function openModal() {
+      document.getElementById('contactModal').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+    function closeModal() {
+      document.getElementById('contactModal').classList.add('hidden');
+      document.getElementById('formFeedback').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      clearSelectedFile();
+    }
+    function submitForm() {
+      const name = document.getElementById('modalName').value;
+      const email = document.getElementById('modalEmail').value;
+      const phone = document.getElementById('modalPhone').value;
+      const message = document.getElementById('modalMessage').value;
+      const feedback = document.getElementById('formFeedback');
+      
+      if (!name || !email || !phone || !message) {
+        showToast('Please fill in all fields (Name, Email, Phone, Message).');
+        return;
+      }
+
+      const fileAttachedInfo = attachedFile ? `\n[Attached File: ${attachedFile.name} (${(attachedFile.size / 1024).toFixed(1)} KB)]` : '';
+      showToast('Sending inquiry to info@primenetsolutions.ae...');
+
+      const templateParams = {
+        to_email: 'info@primenetsolutions.ae',
+        from_name: name,
+        from_email: email,
+        phone: phone,
+        message: message + fileAttachedInfo,
+        attachment_name: attachedFile ? attachedFile.name : 'None',
+        reply_to: email,
+        company: 'PrimeNet Solutions FZC'
+      };
+
+      emailjs.send('service_default', 'template_default', templateParams)
+        .then(function() {
+          feedback.classList.remove('hidden');
+          feedback.textContent = attachedFile 
+            ? `Application with ${attachedFile.name} sent successfully to info@primenetsolutions.ae!`
+            : "Inquiry sent successfully to info@primenetsolutions.ae!";
+          showToast('Inquiry sent successfully!');
+          setTimeout(() => {
+            closeModal();
+          }, 2000);
+        }, function(error) {
+          console.log('EmailJS direct send note:', error);
+          const attachNotice = attachedFile ? `\n\n* Attached File to forward: ${attachedFile.name}` : '';
+          const subject = encodeURIComponent(`New Inquiry/Application from ${name} - PrimeNet Solutions FZC`);
+          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}${attachNotice}`);
+          
+          const mailtoLink = document.createElement('a');
+          mailtoLink.href = `mailto:info@primenetsolutions.ae?subject=${subject}&body=${body}`;
+          document.body.appendChild(mailtoLink);
+          mailtoLink.click();
+          document.body.removeChild(mailtoLink);
+
+          feedback.classList.remove('hidden');
+          feedback.textContent = "Inquiry prepared! Email client opened for info@primenetsolutions.ae.";
+          showToast('Email client opened for info@primenetsolutions.ae!');
+          setTimeout(() => {
+            closeModal();
+          }, 2500);
+        });
+    }
+
+    /* Reliable Chat Toggle & Outside Click */
+    function toggleChat(event) {
+      if (event) {
+        event.stopPropagation();
+      }
+      const chatWindow = document.getElementById('chatWindow');
+      if (!chatWindow) return;
+
+      const isHidden = chatWindow.classList.contains('hidden');
+      if (isHidden) {
+        chatWindow.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          chatWindow.classList.remove('scale-95', 'opacity-0');
+          chatWindow.classList.add('scale-100', 'opacity-100');
+        });
+        const input = document.getElementById('chatInput');
+        if (input) setTimeout(() => input.focus(), 150);
+      } else {
+        chatWindow.classList.remove('scale-100', 'opacity-100');
+        chatWindow.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          chatWindow.classList.add('hidden');
+        }, 300);
+      }
+    }
+
+    // Close chat cleanly when clicking anywhere outside
+    document.addEventListener('click', (e) => {
+      const widget = document.getElementById('chatWidget');
+      const chatWindow = document.getElementById('chatWindow');
+      if (!chatWindow || chatWindow.classList.contains('hidden')) return;
+
+      if (widget && widget.contains(e.target)) return;
+
+      chatWindow.classList.remove('scale-100', 'opacity-100');
+      chatWindow.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        chatWindow.classList.add('hidden');
+      }, 300);
+    });
+
+    const BOT_KNOWLEDGE = {
+      networking: {
+        title: "Enterprise Networking",
+        text: "We design and deploy enterprise networking across the UAE — structured fiber/copper cabling, managed L2/L3 switches, routers, secure Wi-Fi 6/6E, and campus backbone integration engineered for 99.9% uptime.",
+        actions: ["Request Networking Quote", "Cabling & Wi-Fi Survey", "Submit BOQ"]
+      },
+      security: {
+        title: "Security & Biometrics",
+        text: "Our SIRA-compliant security division covers IP CCTV surveillance, biometric access control (fingerprint/face), turnstiles, time-attendance, intrusion detection, and encrypted audit systems for Dubai, Sharjah, and federal sites.",
+        actions: ["Request Security Quote", "SIRA Compliance Check", "Biometrics Specs"]
+      },
+      servers: {
+        title: "Servers & Storage",
+        text: "Enterprise compute and storage — rack/tower servers, SAN/NAS arrays, high-density virtualization hosts, and certified memory/power supplies with rapid dispatch and AMC contracts across the Emirates.",
+        actions: ["Request Server Quote", "Storage Sizing", "Hardware Spares"]
+      },
+      amc: {
+        title: "AMC Contracts",
+        text: "24/7 mission-critical IT maintenance contracts — preventative site surveys, hardware swaps, configuration updates, and UAE regulatory compliance re-certification support.",
+        actions: ["Request AMC Quote", "Schedule Site Audit", "Urgent Support"]
+      }
+    };
+
+    function quickChat(key, type = 'topic', event = null) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+
+      const topicMap = {
+        'networking': 'networking',
+        'networking & infrastructure': 'networking',
+        'security': 'security',
+        'security & biometrics': 'security',
+        'servers': 'servers',
+        'server & storage': 'servers',
+        'amc': 'amc',
+        'open careers & jobs': 'amc',
+        'careers': 'amc'
+      };
+
+      if (type === 'topic') {
+        const normalized = topicMap[key.toLowerCase()] || key.toLowerCase();
+        const kb = BOT_KNOWLEDGE[normalized];
+        if (!kb) {
+          appendBotMessage('Please select an option below, or type your query in the message box.');
+          return;
+        }
+
+        appendUserMessage(`Tell me about ${kb.title}`);
+        setTimeout(() => {
+          appendBotMessage(kb.text);
+          setTimeout(() => {
+            const container = document.getElementById('chatMessages');
+            const btnRow = document.createElement('div');
+            btnRow.className = 'flex gap-2 flex-wrap mt-2';
+            kb.actions.forEach(actionLabel => {
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'text-[11px] rounded-full border border-accentCyan/30 bg-accentCyan/10 px-3 py-1.5 text-cyan-300 hover:bg-accentCyan hover:text-slateDeep transition font-medium cursor-pointer shadow-sm active:scale-95';
+              btn.textContent = actionLabel;
+              btn.onclick = (e) => quickChat(actionLabel, 'action', e);
+              btnRow.appendChild(btn);
+            });
+            container.appendChild(btnRow);
+            container.scrollTop = container.scrollHeight;
+          }, 200);
+        }, 500);
+      } else if (type === 'action') {
+        appendUserMessage(key);
+
+        const lower = key.toLowerCase();
+        setTimeout(() => {
+          if (lower.includes('quote') || lower.includes('boq')) {
+            appendBotMessage(`Opening our quotation form for "${escapeHtml(key)}". You can also contact our sales engineers directly on WhatsApp.`);
+            setTimeout(() => {
+              handleCategoryInquire(key);
+            }, 600);
+          } else if (lower.includes('brochure') || lower.includes('catalog')) {
+            appendBotMessage(`You can download the official PrimeNet Solutions product catalog directly:`);
+            const container = document.getElementById('chatMessages');
+            const dlWrap = document.createElement('div');
+            dlWrap.className = 'mt-2 flex gap-2 flex-wrap';
+            dlWrap.innerHTML = `
+              <a href="brochure/brochure.pdf" download onclick="showToast('Downloading Brochure...')" class="inline-flex items-center gap-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500 hover:text-white px-3 py-1.5 text-xs font-semibold transition">
+                <i class="fa-solid fa-file-pdf"></i> Download Brochure (PDF)
+              </a>
+              <a href="https://wa.me/971526081576?text=Hello%20PrimeNet,%20please%20send%20me%20the%20complete%20product%20spec%20sheet." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-accentCyan/20 border border-accentCyan/40 text-accentCyan hover:bg-accentCyan hover:text-slateDeep px-3 py-1.5 text-xs font-semibold transition">
+                <i class="fa-brands fa-whatsapp"></i> Inquire on WhatsApp
+              </a>
+            `;
+            container.appendChild(dlWrap);
+            container.scrollTop = container.scrollHeight;
+          } else if (lower.includes('specs') || lower.includes('sizing') || lower.includes('survey') || lower.includes('audit')) {
+            appendBotMessage(`For technical surveys and specifications regarding "${escapeHtml(key)}", our UAE engineers are available for immediate on-site or virtual consultation.`);
+            const container = document.getElementById('chatMessages');
+            const actWrap = document.createElement('div');
+            actWrap.className = 'mt-2 flex gap-2 flex-wrap';
+            actWrap.innerHTML = `
+              <a href="https://wa.me/971526081576?text=${encodeURIComponent('Hello PrimeNet, I would like to schedule: ' + key)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-emerald-500 text-white px-3 py-1.5 text-xs font-semibold shadow hover:bg-emerald-600 transition">
+                <i class="fa-brands fa-whatsapp"></i> Chat with Engineer
+              </a>
+              <button type="button" onclick="openModal()" class="rounded-xl bg-white/10 border border-white/20 text-white px-3 py-1.5 text-xs font-semibold hover:bg-white/20 transition">
+                Submit Inquiry Form
+              </button>
+            `;
+            container.appendChild(actWrap);
+            container.scrollTop = container.scrollHeight;
+          } else {
+            appendBotMessage(`Thank you! Our Sharjah enterprise team has logged your interest in "${escapeHtml(key)}". Drop your details in our contact form or ping us directly on WhatsApp.`);
+          }
+        }, 500);
+      }
+    }
+
+    function sendChat() {
+      const input = document.getElementById('chatInput');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+      appendUserMessage(text);
+      input.value = '';
+      setTimeout(() => {
+        const lower = text.toLowerCase();
+        if (lower.includes('quote') || lower.includes('price') || lower.includes('cost')) {
+          appendBotMessage(`We can provide a competitive wholesale quote for your requirements. Would you like to submit your BOQ or speak with a sales engineer?`);
+          const container = document.getElementById('chatMessages');
+          const wrap = document.createElement('div');
+          wrap.className = 'mt-2 flex gap-2 flex-wrap';
+          wrap.innerHTML = `
+            <button type="button" onclick="handleCategoryInquire('${escapeHtml(text)}')" class="rounded-xl bg-accentCyan text-slateDeep font-bold px-3 py-1.5 text-xs shadow hover:bg-cyan-300 transition">Request Quote</button>
+            <a href="https://wa.me/971526081576?text=${encodeURIComponent('Hi PrimeNet, I need pricing for: ' + text)}" target="_blank" class="rounded-xl bg-emerald-500 text-white font-semibold px-3 py-1.5 text-xs hover:bg-emerald-600 transition flex items-center gap-1.5"><i class="fa-brands fa-whatsapp"></i> WhatsApp Quote</a>
+          `;
+          container.appendChild(wrap);
+          container.scrollTop = container.scrollHeight;
+        } else if (lower.includes('brochure') || lower.includes('catalog') || lower.includes('pdf')) {
+          quickChat('brochure', 'action');
+        } else {
+          appendBotMessage(`Thank you for reaching out regarding "${escapeHtml(text)}". PrimeNet specialists in Sharjah are ready to support your deployment. Click below or send us a WhatsApp message.`);
+          const container = document.getElementById('chatMessages');
+          const wrap = document.createElement('div');
+          wrap.className = 'mt-2 flex gap-2 flex-wrap';
+          wrap.innerHTML = `
+            <a href="https://wa.me/971526081576?text=${encodeURIComponent('Hello PrimeNet, I have a question: ' + text)}" target="_blank" class="rounded-xl bg-emerald-500 text-white font-semibold px-3 py-1.5 text-xs hover:bg-emerald-600 transition flex items-center gap-1.5"><i class="fa-brands fa-whatsapp"></i> WhatsApp Direct</a>
+            <button type="button" onclick="openModal()" class="rounded-xl bg-white/10 border border-white/20 text-white font-semibold px-3 py-1.5 text-xs hover:bg-white/20 transition">Open Contact Form</button>
+          `;
+          container.appendChild(wrap);
+          container.scrollTop = container.scrollHeight;
+        }
+      }, 500);
+    }
+
+    function appendUserMessage(text) {
+      const container = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'flex items-start gap-2 justify-end';
+      div.innerHTML = `
+        <div class="bg-gradient-to-r from-accentCyan to-accentViolet text-white rounded-2xl rounded-tr-md px-3.5 py-2.5 max-w-[85%] shadow-md leading-relaxed text-xs sm:text-sm">${escapeHtml(text)}</div>
+        <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-700 flex items-center justify-center text-white text-[10px] sm:text-xs shrink-0 shadow"><i class="fa-solid fa-user"></i></div>
+      `;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendBotMessage(text) {
+      const container = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'flex items-start gap-2';
+      div.innerHTML = `
+        <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-accentCyan to-accentViolet flex items-center justify-center text-white text-[10px] sm:text-xs shrink-0 shadow"><i class="fa-solid fa-robot"></i></div>
+        <div class="bg-slateCard border border-white/5 rounded-2xl rounded-tl-md px-3.5 py-2.5 text-textSub max-w-[85%] shadow-md leading-relaxed text-xs sm:text-sm">${escapeHtml(text)}</div>
+      `;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    // 3D Background Particle Simulation
+    window.addEventListener('load', () => {
+      const canvas = document.getElementById('threeCanvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 32;
+
+      const count = window.innerWidth < 640 ? 400 : 800;
+      const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 85;
+      }
+
+      const particlesGeometry = new THREE.BufferGeometry();
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      
+      const particlesMaterial = new THREE.PointsMaterial({ 
+        size: window.innerWidth < 640 ? 0.45 : 0.35, 
+        color: 0x06b6d4, 
+        transparent: true, 
+        opacity: 0.75 
+      });
+      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particles);
+
+      let mouseX = 0;
+      let mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 0.4;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 0.4;
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        particles.rotation.y += 0.0012;
+        particles.rotation.x += 0.0006;
+        
+        camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
+        camera.position.y += (-mouseY * 5 - camera.position.y) * 0.05;
+        camera.lookAt(scene.position);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    });
+
+    /* Premium Scroll Sound — synthesized mouse-wheel ratchet (no assets) */
+    const ScrollSound = (() => {
+      let audioCtx = null;
+      let masterGain = null;
+      let noiseBuffer = null;
+      let enabled = true;
+      try { enabled = localStorage.getItem('pns-scroll-sound') !== 'off'; } catch (e) {}
+      let lastPlay = 0;
+      let lastY = window.scrollY || window.pageYOffset || 0;
+      let accumDy = 0;
+      let smoothVelocity = 0;
+      let hintShown = false;
+      let lockedAt = 0;
+      let wasRunningBeforePill = null;
+
+      function ensureContext() {
+        if (audioCtx) return audioCtx;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        audioCtx = new AC();
+        masterGain = audioCtx.createGain();
+        // Soft overall master volume (reduced from 1.0 to 0.35)
+        masterGain.gain.value = 0.35;
+        masterGain.connect(audioCtx.destination);
+
+        const length = Math.floor(audioCtx.sampleRate * 0.4);
+        noiseBuffer = audioCtx.createBuffer(1, length, audioCtx.sampleRate);
+        const data = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < length; i++) data[i] = Math.random() * 2 - 1;
+
+        audioCtx.onstatechange = updateUI;
+        return audioCtx;
+      }
+
+      function unlock() {
+        const ctx = ensureContext();
+        if (!ctx) return;
+        if (ctx.state === 'suspended') {
+          ctx.resume().then(() => {
+            updateUI();
+            try {
+              const silent = ctx.createBufferSource();
+              silent.buffer = ctx.createBuffer(1, 1, ctx.rate || ctx.sampleRate);
+              silent.connect(ctx.destination);
+              silent.start(0);
+            } catch (e) {}
+          }).catch(() => {});
+        } else {
+          updateUI();
+        }
+      }
+
+      function playMouseWheel(strength) {
+        if (!enabled) return;
+        const ctx = ensureContext();
+        if (!ctx) return;
+        if (ctx.state !== 'running') { unlock(); return; }
+        if (!noiseBuffer) return;
+
+        const t0 = ctx.currentTime;
+        // Soft, non-intrusive tactile volume (0.04 to 0.08 range)
+        const volume = 0.035 + Math.min(1, Math.max(0, strength)) * 0.045;
+        const tickBus = ctx.createGain();
+        tickBus.gain.value = volume;
+        tickBus.connect(masterGain);
+
+        const gainScale = 0.5 + strength * 0.35;
+        const teeth = 1 + (Math.random() < 0.3 ? 1 : 0); // Gentle 1-2 smooth micro-pulses
+        let offset = 0;
+
+        for (let i = 0; i < teeth; i++) {
+          const t = t0 + offset;
+          const falloff = 1 - i * 0.4;
+          const pitch = 1400 + Math.random() * 400 + i * 50;
+
+          // Soft low-passed brush texture instead of sharp highpass noise
+          const noise = ctx.createBufferSource();
+          noise.buffer = noiseBuffer;
+          const bandpass = ctx.createBiquadFilter();
+          bandpass.type = 'bandpass';
+          bandpass.frequency.value = 1200 + Math.random() * 300;
+          bandpass.Q.value = 1.2;
+
+          const noiseGain = ctx.createGain();
+          noiseGain.gain.setValueAtTime(0.0001, t);
+          noiseGain.gain.exponentialRampToValueAtTime(0.018 * gainScale * falloff, t + 0.003);
+          noiseGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.022);
+          noise.connect(bandpass);
+          bandpass.connect(noiseGain);
+          noiseGain.connect(tickBus);
+          noise.start(t);
+          noise.stop(t + 0.025);
+
+          // Warm, rounded sine-triangle body
+          const tooth = ctx.createOscillator();
+          const toothGain = ctx.createGain();
+          tooth.type = 'sine';
+          tooth.frequency.setValueAtTime(pitch, t);
+          tooth.frequency.exponentialRampToValueAtTime(pitch * 0.65, t + 0.025);
+          toothGain.gain.setValueAtTime(0.0001, t);
+          toothGain.gain.exponentialRampToValueAtTime(0.015 * gainScale * falloff, t + 0.003);
+          toothGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.03);
+          tooth.connect(toothGain);
+          toothGain.connect(tickBus);
+          tooth.start(t);
+          tooth.stop(t + 0.035);
+
+          offset += 0.018;
+        }
+
+        // Deep, gentle, subtle low haptic bump (pillowy touch)
+        const thock = ctx.createOscillator();
+        const thockGain = ctx.createGain();
+        thock.type = 'sine';
+        thock.frequency.setValueAtTime(110, t0);
+        thock.frequency.exponentialRampToValueAtTime(65, t0 + 0.045);
+        thockGain.gain.setValueAtTime(0.0001, t0);
+        thockGain.gain.exponentialRampToValueAtTime(0.022 * gainScale, t0 + 0.004);
+        thockGain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.05);
+        thock.connect(thockGain);
+        thockGain.connect(tickBus);
+        thock.start(t0);
+        thock.stop(t0 + 0.06);
+      }
+
+      function chime() {
+        const ctx = ensureContext();
+        if (!ctx) return;
+        if (ctx.state !== 'running') { unlock(); return; }
+        const base = ctx.currentTime;
+        [520, 780].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const start = base + i * 0.08;
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.0001, start);
+          gain.gain.exponentialRampToValueAtTime(0.025, start + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.28);
+          osc.connect(gain);
+          gain.connect(masterGain);
+          osc.start(start);
+          osc.stop(start + 0.3);
+        });
+      }
+
+      function onScroll() {
+        const now = performance.now();
+        const y = window.scrollY || window.pageYOffset || 0;
+        accumDy += Math.abs(y - lastY);
+        lastY = y;
+
+        if (!enabled) {
+          accumDy = 0;
+          lastPlay = now;
+          return;
+        }
+
+        if (!audioCtx || audioCtx.state !== 'running') {
+          unlock();
+          if (!hintShown) {
+            if (!lockedAt) {
+              lockedAt = now;
+            } else if (now - lockedAt > 800) {
+              hintShown = true;
+              if (typeof showToast === 'function') {
+                showToast('Tap anywhere once to enable the mouse wheel scroll sound');
+              }
+            }
+          }
+        } else if (!hintShown) {
+          hintShown = true;
+        }
+
+        // Throttle slightly more (120ms) to ensure gentle pacing
+        if (now - lastPlay < 120) return;
+
+        const dt = Math.max(1, now - lastPlay);
+        if (accumDy >= 14) {
+          const speed = accumDy / dt;
+          const strength = Math.min(1, speed / 2.0);
+          smoothVelocity = smoothVelocity * 0.6 + strength * 0.4;
+          playMouseWheel(Math.min(1, 0.25 + smoothVelocity * 0.5));
+        }
+        accumDy = 0;
+        lastPlay = now;
+      }
+
+      function updateUI() {
+        const btn = document.getElementById('soundToggle');
+        const icon = document.getElementById('soundIcon');
+        const label = document.getElementById('soundLabel');
+        const dot = document.getElementById('soundDot');
+        const pulse = document.getElementById('soundPulse');
+        if (!btn) return;
+
+        const live = !!audioCtx && audioCtx.state === 'running';
+        const stateText = !enabled ? 'Muted' : (live ? 'Sound On' : 'Tap for sound');
+
+        btn.setAttribute('aria-pressed', String(enabled));
+        btn.setAttribute('aria-label', enabled ? 'Mute mouse wheel scroll sound' : 'Enable mouse wheel scroll sound');
+        btn.title = enabled ? 'Mute mouse wheel scroll sound' : 'Enable mouse wheel scroll sound';
+        btn.classList.toggle('border-accentCyan/30', enabled);
+        btn.classList.toggle('border-amber-400/40', enabled && !live);
+
+        if (label) label.textContent = stateText;
+        if (icon) icon.className = enabled
+          ? (live
+              ? 'fa-solid fa-volume-high text-accentCyan text-xs sm:text-sm transition-transform duration-300 group-hover:scale-110'
+              : 'fa-solid fa-volume-low text-amber-300 text-xs sm:text-sm transition-transform duration-300 group-hover:scale-110')
+          : 'fa-solid fa-volume-xmark text-slate-500 text-xs sm:text-sm transition-transform duration-300 group-hover:scale-110';
+        if (dot) dot.className = enabled
+          ? `relative inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full ${live ? 'bg-accentMint' : 'bg-amber-400'}`
+          : 'relative inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-slate-600';
+        if (pulse) pulse.style.display = enabled && live ? '' : 'none';
+      }
+
+      function setEnabled(value) {
+        enabled = value;
+        try { localStorage.setItem('pns-scroll-sound', value ? 'on' : 'off'); } catch (e) {}
+        updateUI();
+        if (value) {
+          unlock();
+          setTimeout(chime, 60);
+        }
+      }
+
+      function toggle() {
+        const wasRunning = wasRunningBeforePill;
+        wasRunningBeforePill = null;
+
+        if (enabled && wasRunning === false) {
+          unlock();
+          setTimeout(chime, 150);
+          updateUI();
+          return;
+        }
+        setEnabled(!enabled);
+      }
+
+      function init() {
+        ['pointerdown', 'click', 'keydown', 'touchstart', 'wheel'].forEach((evt) => {
+          window.addEventListener(evt, unlock, { passive: true });
+        });
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        const btn = document.getElementById('soundToggle');
+        if (btn) {
+          const captureState = () => {
+            wasRunningBeforePill = !!audioCtx && audioCtx.state === 'running';
+          };
+          btn.addEventListener('pointerdown', captureState, { capture: true });
+          btn.addEventListener('keydown', captureState, { capture: true });
+        }
+
+        lastY = window.scrollY || window.pageYOffset || 0;
+        updateUI();
+      }
+
+      return { init, toggle, setEnabled };
+    })();
+
+    function toggleScrollSound() { ScrollSound.toggle(); }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', ScrollSound.init);
+    } else {
+      ScrollSound.init();
+    }
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.premium-nav-item');
+    window.addEventListener('scroll', () => {
+      let currentSectionId = '';
+      const scrollPos = window.pageYOffset + 140;
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+      if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 8) {
+        currentSectionId = 'site-footer';
+      }
+      navLinks.forEach(link => {
+        link.classList.remove('active-nav');
+        const href = link.getAttribute('href');
+        if (href && href === `#${currentSectionId}`) {
+          link.classList.add('active-nav');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
