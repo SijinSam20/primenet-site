@@ -11,6 +11,11 @@ Welcome to the official repository for **PrimeNet Solutions FZC**, a premier ent
   * **Components:** Interactive multi-slide hero carousel, instant WhatsApp deep links, modal RFP quote generators, and smart inquiry chatbot.
   * **Deployment:** Hosted directly on GitHub Pages.
 
+## 🌐 Live Preview
+
+Once deployed via GitHub Pages, view the site live at:  
+`https://<your-username>.github.io/<repository-name>/`
+
 ## 📁 Repository Structure
 
 ```text
