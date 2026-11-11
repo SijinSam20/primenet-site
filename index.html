@@ -30,6 +30,23 @@
 
   <!-- Silence development warning for standalone CDN usage -->
   <script>
+    // ═══════════════════════════════════════════════════════════════════
+    //  EmailJS Configuration (Contact Form Backend)
+    //  ─────────────────────────────────────────────────────────────────
+    //  To enable DIRECT email sending (no email app popup), create a
+    //  free account at https://www.emailjs.com and fill in the three
+    //  values below. Until then, the form falls back to opening the
+    //  user's email app with a pre-filled draft — no inquiry is lost.
+    //
+    //  Steps:
+    //  1. Sign up at https://www.emailjs.com (free tier: 200 emails/mo)
+    //  2. Add an Email Service (Gmail/Outlook/SMTP) → copy Service ID
+    //  3. Create an Email Template with variables:
+    //     {{from_name}}, {{from_email}}, {{phone}}, {{message}}
+    //     → copy Template ID
+    //  4. Account → API Keys → copy Public Key
+    //  5. Paste all three below and save.
+    // ═══════════════════════════════════════════════════════════════════
     (function () {
       const origWarn = console.warn;
       console.warn = function (...args) {
@@ -53,9 +70,9 @@
       // Set these two values to enable direct in-page sending.
       // While they stay empty, the contact form falls back to a
       // pre-filled email draft so no inquiry is ever lost.
-      var PNS_EMAILJS_PUBLIC_KEY = "";
-      var PNS_EMAILJS_SERVICE_ID = "";
-      var PNS_EMAILJS_TEMPLATE_ID = "";
+      var PNS_EMAILJS_PUBLIC_KEY = "nu7sVk_VK68m3Mjrm";
+      var PNS_EMAILJS_SERVICE_ID = "service_kotqwgn";
+      var PNS_EMAILJS_TEMPLATE_ID = "template_jcqqbom";
 
       window.__PNS_EMAILJS_CONFIG = {
         publicKey: PNS_EMAILJS_PUBLIC_KEY,
@@ -73,6 +90,25 @@
         }
       }
     })();
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Google reCAPTCHA v2 — bot protection for the contact form
+       ───────────────────────────────────────────────────────────────────
+       Leave the site key empty to keep reCAPTCHA disabled.
+
+       To enable:
+       1. Go to https://www.google.com/recaptcha/admin/create
+       2. Label: PrimeNet Solutions
+          reCAPTCHA type: v2 → "I'm not a robot" checkbox
+          Domains: primenetsolutions.ae, www.primenetsolutions.ae
+       3. Submit → copy the SITE KEY into the variable below.
+       4. Copy the SECRET KEY into EmailJS:
+          Templates → Contact Us → Settings →
+          "Enable reCAPTCHA V2 verification" → paste secret → Save.
+       ═══════════════════════════════════════════════════════════════════ -->
+  <script>
+    window.PNS_RECAPTCHA_SITE_KEY = "6LdVgxsuAAAAAECoftx52VEPFFxRwb6TqSC1qAEd";
   </script>
 
   <script>
@@ -544,7 +580,8 @@
       </nav>
     </div>
     <div id="mobileMenu" class="lg:hidden overflow-hidden max-h-0 transition-[max-height] duration-500 ease-in-out bg-slateMid/95 backdrop-blur-2xl border-t border-white/5">
-      <ul class="flex flex-col gap-0.5 px-5 py-4 text-sm font-medium text-textSub">
+      <div class="flex flex-col max-h-[70vh]">
+        <ul class="flex flex-col gap-0.5 px-5 py-4 text-sm font-medium text-textSub overflow-y-auto flex-1 min-h-0">
         <li><a href="#hero" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-house text-sm text-accentCyan w-5"></i> <span class="font-semibold text-white">Home</span></a></li>
         <li><a href="#about" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-building-columns text-sm text-accentMint w-5"></i> <span class="font-semibold text-white">About</span></a></li>
         <li><a href="#services" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-gear text-sm text-amber-400 w-5"></i> <span class="font-semibold text-white">Services</span></a></li>
@@ -552,8 +589,11 @@
         <li><a href="#careers" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-briefcase text-sm text-sky-400 w-5"></i> <span class="font-semibold text-white">Careers</span></a></li>
         <li><a href="#site-footer" class="mobile-nav-link block py-2 hover:text-white flex items-center gap-3" onclick="toggleMobileMenu()"><i class="fa-solid fa-envelope text-sm text-violet-400 w-5"></i> <span class="font-semibold text-white">Contact</span></a></li>
         <li><a href="brochure/PNS Brochure.pdf" download target="_blank" onclick="showToast('Downloading PrimeNet Solutions Brochure PDF...'); toggleMobileMenu();" class="mobile-nav-link block py-2 hover:text-white flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 px-3 rounded-xl mt-1 text-emerald-300"><span class="flex items-center gap-3"><i class="fa-solid fa-file-pdf text-sm text-emerald-400 w-5"></i> <span class="font-semibold">Download Brochure</span></span> <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-400/20 border border-emerald-400/30">PDF</span></a></li>
-        <li class="pt-3"><a href="#contact" class="block w-full text-center rounded-full bg-gradient-to-r from-accentCyan to-accentViolet px-5 py-3 font-semibold text-white shadow-lg shadow-accentCyan/20" onclick="toggleMobileMenu()">Get in touch</a></li>
-      </ul>
+        </ul>
+        <div class="sticky bottom-0 px-5 py-3 bg-slateMid/95 backdrop-blur-2xl border-t border-white/5">
+          <a href="#contact" class="block w-full text-center rounded-full bg-gradient-to-r from-accentCyan to-accentViolet px-5 py-3 font-semibold text-white shadow-lg shadow-accentCyan/20" onclick="toggleMobileMenu()">Get in touch</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -842,6 +882,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -880,7 +921,7 @@
 
           <!-- Descriptive Subtitle with refined typography -->
           <p class="text-textSub text-sm sm:text-base md:text-lg mt-4 sm:mt-5 max-w-2xl mx-auto leading-relaxed font-normal">
-            End-to-end technology solutions tailored for UAE businesses, government mandates, and rigorous regulatory standards.
+            End-to-end technology solutions tailored for UAE businesses, government mandates, and rigorous regulatory standards — from networking, security and server infrastructure to website creation, e-commerce, and invoicing software.
           </p>
 
           <!-- UAE Trust & Compliance Micro Badges -->
@@ -1098,7 +1139,7 @@
                     <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 mb-1">
                       <span class="w-2 h-2 rounded-full bg-sky-500"></span> Implementation &amp; Training
                     </div>
-                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Data migration, staff training, and setup for Tally, QuickBooks, and Zoho Books.</p>
+                    <p class="text-[11px] sm:text-xs text-textSub leading-relaxed pl-3.5 sm:pl-4">Data migration and staff training.</p>
                   </div>
                 </div>
               </div>
@@ -1245,7 +1286,8 @@
                 </a>
               </div>
             </div>
-          </div>
+
+     </div>
         </div>
       </div>
     </section>
@@ -1826,6 +1868,8 @@
   </div>
 
   <!-- Premium Scroll Sound Toggle -->
+  <!-- Tick variant toggle removed: light tick only -->
+
   <button id="soundToggle" onclick="toggleScrollSound()" class="sound-toggle fixed bottom-24 sm:bottom-28 left-4 sm:left-6 z-40 group flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/75 backdrop-blur-xl px-3 sm:px-3.5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-semibold text-textSub shadow-lg shadow-black/40 hover:border-accentCyan/40 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accentCyan/60 transition-all duration-300 cursor-pointer" aria-pressed="true" aria-label="Toggle mouse wheel scroll sound" title="Mouse wheel scroll sound">
     <span class="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
       <span id="soundPulse" class="absolute inline-flex h-full w-full rounded-full bg-accentMint opacity-75 animate-ping"></span>
@@ -1897,6 +1941,17 @@
             <label for="modalMessage" class="block text-[11px] font-semibold text-textSub uppercase tracking-wider mb-1">Message</label>
             <textarea id="modalMessage" rows="2.5" autocomplete="off" placeholder="How can we help?" required class="w-full rounded-xl bg-slateCard border border-white/10 px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-textSub/60 focus:outline-none focus:ring-2 focus:ring-accentCyan/40 transition resize-none"></textarea>
           </div>
+          <!-- Google reCAPTCHA v2 (shown only when a site key is configured) -->
+          <div id="recaptchaWrap" class="hidden flex-col items-center gap-2">
+            <div id="recaptchaWidget"></div>
+            <p id="recaptchaError" class="hidden text-[11px] text-red-400 font-medium text-center">
+              Please confirm you're not a robot before sending.
+            </p>
+          </div>
+          <p id="emailjsNotice" class="hidden text-[10px] sm:text-[11px] text-textSub/70 text-center leading-relaxed">
+            <i class="fa-solid fa-info-circle text-accentCyan mr-1"></i>
+            EmailJS not configured — submissions open your email app with a pre-filled draft. See code comments in index.html to enable direct sending.
+          </p>
           <button type="submit" id="submitBtn" class="w-full rounded-xl bg-gradient-to-r from-accentCyan to-accentViolet px-5 py-3 sm:py-3.5 text-sm sm:text-base font-bold text-white shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2">
             <span id="submitBtnText">Send Message</span>
             <i class="fa-solid fa-paper-plane text-xs"></i>
@@ -2198,15 +2253,95 @@
       }
     }
 
+    /* ── Google reCAPTCHA v2 (optional bot protection) ── */
+    function recaptchaEnabled() {
+      return typeof window.PNS_RECAPTCHA_SITE_KEY === 'string' &&
+        window.PNS_RECAPTCHA_SITE_KEY.trim() !== '';
+    }
+    function loadRecaptcha() {
+      if (!recaptchaEnabled() || window.__pnsRecaptchaLoading) return;
+      window.__pnsRecaptchaLoading = true;
+      const s = document.createElement('script');
+      s.src = 'https://www.google.com/recaptcha/api.js?render=explicit&onload=__pnsRecaptchaOnLoad';
+      s.async = true;
+      s.defer = true;
+      s.onerror = function () { window.__pnsRecaptchaFailed = true; };
+      document.head.appendChild(s);
+    }
+    window.__pnsRecaptchaOnLoad = function () {
+      window.__pnsRecaptchaLoaded = true;
+      renderRecaptcha();
+    };
+    function renderRecaptcha() {
+      if (!recaptchaEnabled()) return;
+      const wrap = document.getElementById('recaptchaWrap');
+      if (!wrap) return;
+      if (!window.grecaptcha || typeof window.grecaptcha.render !== 'function') return;
+      if (window.__pnsRecaptchaWidget !== undefined && window.__pnsRecaptchaWidget !== null) {
+        wrap.classList.remove('hidden');
+        wrap.classList.add('flex');
+        return;
+      }
+      try {
+        window.__pnsRecaptchaWidget = window.grecaptcha.render('recaptchaWidget', {
+          sitekey: window.PNS_RECAPTCHA_SITE_KEY.trim(),
+          theme: 'dark',
+          callback: function () {
+            const err = document.getElementById('recaptchaError');
+            if (err) err.classList.add('hidden');
+          },
+          'expired-callback': function () {
+            const err = document.getElementById('recaptchaError');
+            if (err) err.classList.remove('hidden');
+          }
+        });
+        wrap.classList.remove('hidden');
+        wrap.classList.add('flex');
+      } catch (e) {
+        console.log('reCAPTCHA render note:', e);
+      }
+    }
+    function getRecaptchaToken() {
+      if (!recaptchaEnabled()) return '';
+      if (!window.grecaptcha || typeof window.grecaptcha.getResponse !== 'function') return '';
+      const id = window.__pnsRecaptchaWidget;
+      try {
+        return (id === undefined || id === null)
+          ? (window.grecaptcha.getResponse() || '')
+          : (window.grecaptcha.getResponse(id) || '');
+      } catch (e) {
+        return '';
+      }
+    }
+    function resetRecaptcha() {
+      const err = document.getElementById('recaptchaError');
+      if (err) err.classList.add('hidden');
+      if (!recaptchaEnabled()) return;
+      if (!window.grecaptcha || typeof window.grecaptcha.reset !== 'function') return;
+      const id = window.__pnsRecaptchaWidget;
+      try {
+        (id === undefined || id === null) ? window.grecaptcha.reset() : window.grecaptcha.reset(id);
+      } catch (e) { /* ignore */ }
+    }
+
     function openModal() {
       document.getElementById('contactModal').classList.remove('hidden');
       document.body.classList.add('overflow-hidden');
+      const notice = document.getElementById('emailjsNotice');
+      if (notice) {
+        notice.classList.toggle('hidden', !!window.__PNS_EMAILJS_READY);
+      }
+      if (recaptchaEnabled()) {
+        loadRecaptcha();
+        renderRecaptcha();
+      }
     }
     function closeModal() {
       document.getElementById('contactModal').classList.add('hidden');
       document.getElementById('formFeedback').classList.add('hidden');
       document.body.classList.remove('overflow-hidden');
       clearSelectedFile();
+      resetRecaptcha();
     }
 
     const LEGAL_CONTENT = {
@@ -2292,6 +2427,28 @@
         return;
       }
 
+      // reCAPTCHA v2: require a solved token before sending
+      const recaptchaErr = document.getElementById('recaptchaError');
+      if (recaptchaErr) recaptchaErr.classList.add('hidden');
+
+      let recaptchaToken = '';
+      if (recaptchaEnabled() && !window.__pnsRecaptchaFailed) {
+        if (!window.__pnsRecaptchaLoaded) {
+          loadRecaptcha();
+          renderRecaptcha();
+          showToast('Verification is still loading. Please try again in a moment.');
+          return;
+        }
+        recaptchaToken = getRecaptchaToken();
+        if (!recaptchaToken) {
+          if (recaptchaErr) recaptchaErr.classList.remove('hidden');
+          showToast('Please tick "I\'m not a robot" before sending.');
+          const wrap = document.getElementById('recaptchaWrap');
+          if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+      }
+
       setBusy(true, 'Sending...');
       showToast('Sending inquiry to info@primenetsolutions.ae...');
 
@@ -2299,11 +2456,15 @@
         to_email: 'info@primenetsolutions.ae',
         from_name: name,
         from_email: email,
+        // Aliases so templates using {{name}} / {{email}} also resolve
+        name: name,
+        email: email,
         phone: phone,
         message: message + (attachedFile ? `\n[Attached File: ${attachedFile.name} (${(attachedFile.size / 1024).toFixed(1)} KB)]` : ''),
         attachment_name: attachedFile ? attachedFile.name : 'None',
         reply_to: email,
-        company: 'PrimeNet Solutions FZC'
+        company: 'PrimeNet Solutions FZC',
+        'g-recaptcha-response': recaptchaToken
       };
 
       emailjs.send(cfg.serviceId, cfg.templateId, templateParams)
@@ -2835,7 +2996,8 @@
       let masterGain = null;
       let noiseBuffer = null;
       let enabled = true;
-      try { enabled = localStorage.getItem('pns-scroll-sound') !== 'off'; } catch (e) {}
+      try { localStorage.setItem('pns-scroll-sound', 'on'); } catch (e) {}
+      let tickVariant = 1; // light tick only
       let lastPlay = 0;
       let lastY = window.scrollY || window.pageYOffset || 0;
       let accumDy = 0;
@@ -2884,17 +3046,20 @@
         }
       }
 
-      function playMouseWheel(strength) {
+      function playMouseWheel(strength, dir) {
         if (!enabled) return;
         const ctx = ensureContext();
         if (!ctx) return;
         if (ctx.state !== 'running') { unlock(); return; }
         if (!noiseBuffer) return;
 
+        const d = dir >= 0 ? 1 : -1; // 1 = scrolling down, -1 = up
+        const light = tickVariant === 1;
+
         const t0 = ctx.currentTime;
         ratchetPlays++;
         // Tactile volume (clearly audible, still non-intrusive)
-        const volume = 0.12 + Math.min(1, Math.max(0, strength)) * 0.14;
+        const volume = (light ? 0.12 : 0.25) + Math.min(1, Math.max(0, strength)) * (light ? 0.12 : 0.20);
         const tickBus = ctx.createGain();
         tickBus.gain.value = volume;
         tickBus.connect(masterGain);
@@ -2906,19 +3071,19 @@
         for (let i = 0; i < teeth; i++) {
           const t = t0 + offset;
           const falloff = 1 - i * 0.4;
-          const pitch = 1400 + Math.random() * 400 + i * 50;
+          const pitch = (light ? (d > 0 ? 2100 : 1700) : (d > 0 ? 1400 : 900)) + Math.random() * 400 + i * 50;
 
           // Soft low-passed brush texture instead of sharp highpass noise
           const noise = ctx.createBufferSource();
           noise.buffer = noiseBuffer;
           const bandpass = ctx.createBiquadFilter();
           bandpass.type = 'bandpass';
-          bandpass.frequency.value = 1200 + Math.random() * 300;
+          bandpass.frequency.value = (light ? (d > 0 ? 1900 : 1500) : (d > 0 ? 1200 : 700)) + Math.random() * 300;
           bandpass.Q.value = 1.2;
 
           const noiseGain = ctx.createGain();
           noiseGain.gain.setValueAtTime(0.0001, t);
-          noiseGain.gain.exponentialRampToValueAtTime(0.07 * gainScale * falloff, t + 0.003);
+          noiseGain.gain.exponentialRampToValueAtTime((light ? 0.06 : 0.12) * gainScale * falloff, t + 0.003);
           noiseGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.022);
           noise.connect(bandpass);
           bandpass.connect(noiseGain);
@@ -2933,7 +3098,7 @@
           tooth.frequency.setValueAtTime(pitch, t);
           tooth.frequency.exponentialRampToValueAtTime(pitch * 0.65, t + 0.025);
           toothGain.gain.setValueAtTime(0.0001, t);
-          toothGain.gain.exponentialRampToValueAtTime(0.055 * gainScale * falloff, t + 0.003);
+          toothGain.gain.exponentialRampToValueAtTime((light ? 0.05 : 0.10) * gainScale * falloff, t + 0.003);
           toothGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.03);
           tooth.connect(toothGain);
           toothGain.connect(tickBus);
@@ -2947,10 +3112,10 @@
         const thock = ctx.createOscillator();
         const thockGain = ctx.createGain();
         thock.type = 'sine';
-        thock.frequency.setValueAtTime(110, t0);
+        thock.frequency.setValueAtTime(light ? 90 : (d > 0 ? 130 : 80), t0);
         thock.frequency.exponentialRampToValueAtTime(65, t0 + 0.045);
         thockGain.gain.setValueAtTime(0.0001, t0);
-        thockGain.gain.exponentialRampToValueAtTime(0.08 * gainScale, t0 + 0.004);
+        thockGain.gain.exponentialRampToValueAtTime((light ? 0.05 : 0.15) * gainScale, t0 + 0.004);
         thockGain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.05);
         thock.connect(thockGain);
         thockGain.connect(tickBus);
@@ -2970,7 +3135,7 @@
           osc.type = 'sine';
           osc.frequency.value = freq;
           gain.gain.setValueAtTime(0.0001, start);
-          gain.gain.exponentialRampToValueAtTime(0.08, start + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.12, start + 0.015);
           gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.28);
           osc.connect(gain);
           gain.connect(masterGain);
@@ -2989,6 +3154,7 @@
 
         suppressRatchet = true;
         lastSettle = performance.now();
+        setTimeout(() => { suppressRatchet = false; }, 600);
 
         const s = Math.min(1, Math.max(0.2, strength || 0.4));
         const t0 = ctx.currentTime;
@@ -3009,7 +3175,7 @@
         bandpass.frequency.exponentialRampToValueAtTime(f1, t0 + dur);
         const noiseGain = ctx.createGain();
         noiseGain.gain.setValueAtTime(0.0001, t0);
-        noiseGain.gain.exponentialRampToValueAtTime(0.16 * (0.6 + s * 0.4), t0 + dur * 0.35);
+        noiseGain.gain.exponentialRampToValueAtTime(0.22 * (0.6 + s * 0.4), t0 + dur * 0.35);
         noiseGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
         noise.connect(bandpass); bandpass.connect(noiseGain); noiseGain.connect(bus);
         noise.start(t0); noise.stop(t0 + dur + 0.02);
@@ -3023,7 +3189,7 @@
         glide.frequency.setValueAtTime(g0, t0);
         glide.frequency.exponentialRampToValueAtTime(g1, t0 + dur);
         glideGain.gain.setValueAtTime(0.0001, t0);
-        glideGain.gain.exponentialRampToValueAtTime(0.06, t0 + dur * 0.3);
+        glideGain.gain.exponentialRampToValueAtTime(0.09, t0 + dur * 0.3);
         glideGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
         glide.connect(glideGain); glideGain.connect(bus);
         glide.start(t0); glide.stop(t0 + dur + 0.02);
@@ -3035,7 +3201,7 @@
         land.frequency.setValueAtTime(150, t0 + dur);
         land.frequency.exponentialRampToValueAtTime(70, t0 + dur + 0.06);
         landGain.gain.setValueAtTime(0.0001, t0 + dur);
-        landGain.gain.exponentialRampToValueAtTime(0.09, t0 + dur + 0.006);
+        landGain.gain.exponentialRampToValueAtTime(0.13, t0 + dur + 0.006);
         landGain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur + 0.08);
         land.connect(landGain); landGain.connect(bus);
         land.start(t0 + dur); land.stop(t0 + dur + 0.09);
@@ -3052,7 +3218,9 @@
           suppressRatchet = false;
         }
 
-        accumDy += Math.abs(y - lastY);
+        const dy = y - lastY;
+        const dir = dy >= 0 ? 1 : -1;
+        accumDy += Math.abs(dy);
         lastY = y;
 
         if (!enabled) {
@@ -3066,10 +3234,10 @@
           if (!hintShown) {
             if (!lockedAt) {
               lockedAt = now;
-            } else if (now - lockedAt > 800) {
+            } else if (now - lockedAt > 0) {
               hintShown = true;
               if (typeof showToast === 'function') {
-                showToast('Tap anywhere once to enable the mouse wheel scroll sound');
+                showToast('Click the Sound button (bottom-left) to enable scroll sound');
               }
             }
           }
@@ -3078,14 +3246,14 @@
         }
 
         // Throttle slightly more (120ms) to ensure gentle pacing
-        if (now - lastPlay < 120) return;
+        if (now - lastPlay < 60) return;
 
         const dt = Math.max(1, now - lastPlay);
-        if (!suppressRatchet && accumDy >= 14) {
+        if (!suppressRatchet && accumDy >= 4) {
           const speed = accumDy / dt;
           const strength = Math.min(1, speed / 2.0);
           smoothVelocity = smoothVelocity * 0.6 + strength * 0.4;
-          playMouseWheel(Math.min(1, 0.25 + smoothVelocity * 0.5));
+          playMouseWheel(Math.min(1, 0.25 + smoothVelocity * 0.5), dir);
         }
         accumDy = 0;
         lastPlay = now;
@@ -3131,16 +3299,11 @@
       }
 
       function toggle() {
-        const wasRunning = wasRunningBeforePill;
-        wasRunningBeforePill = null;
-
-        if (enabled && wasRunning === false) {
+        setEnabled(!enabled);
+        if (enabled) {
           unlock();
           setTimeout(chime, 150);
-          updateUI();
-          return;
         }
-        setEnabled(!enabled);
       }
 
       function init() {
@@ -3151,25 +3314,37 @@
 
         const btn = document.getElementById('soundToggle');
         if (btn) {
-          const captureState = () => {
-            wasRunningBeforePill = !!audioCtx && audioCtx.state === 'running';
-          };
-          btn.addEventListener('pointerdown', captureState, { capture: true });
-          btn.addEventListener('keydown', captureState, { capture: true });
+          updateUI();
         }
 
         lastY = window.scrollY || window.pageYOffset || 0;
         updateUI();
+        updateTickVariantUI();
+      }
+
+      function setTickVariant(v) {
+        tickVariant = (v === 1) ? 1 : 0;
+        try { localStorage.setItem('pns-tick-variant', String(tickVariant)); } catch (e) {}
+        updateTickVariantUI();
+      }
+      function getTickVariant() { return tickVariant; }
+      function updateTickVariantUI() {
+        const label = document.getElementById('tickVariantLabel');
+        const icon = document.getElementById('tickVariantIcon');
+        if (label) label.textContent = tickVariant === 1 ? 'Light Tick' : 'Standard Tick';
+        if (icon) icon.className = tickVariant === 1
+          ? 'fa-solid fa-feather text-accentCyan text-xs sm:text-sm transition-transform duration-300 group-hover:scale-110'
+          : 'fa-solid fa-sliders text-accentCyan text-xs sm:text-sm transition-transform duration-300 group-hover:scale-110';
       }
 
       return {
-        init, toggle, setEnabled, playNav,
+        init, toggle, setEnabled, playNav, setTickVariant, getTickVariant,
         debug: () => ({
           enabled,
           ctxState: audioCtx ? audioCtx.state : 'no-context',
           created: !!audioCtx,
           lastPlayAge: lastPlay ? Math.round(performance.now() - lastPlay) : -1,
-          lastY, accumDy, suppressRatchet, hintShown, ratchetPlays
+          lastY, accumDy, suppressRatchet, hintShown, ratchetPlays, tickVariant
         })
       };
     })();
@@ -3184,6 +3359,13 @@
       if (!hash || hash.length < 2) return;
       const target = document.getElementById(hash.slice(1));
       if (!target) return;
+      // Make hash navigation actually scroll (robust across browsers/review pane)
+      e.preventDefault();
+      const offset = 80;
+      const top = Math.max(0, (target.offsetTop || (target.getBoundingClientRect().top + window.scrollY)) - offset);
+      window.scrollTo({ top, behavior: 'instant' });
+      try { history.replaceState(null, '', hash); } catch (err) {}
+      // Navigation swoosh
       const rel = target.getBoundingClientRect().top;
       const dir = rel >= 0 ? 1 : -1; // down or up the page
       const strength = Math.min(1, Math.abs(rel) / (window.innerHeight * 6));
