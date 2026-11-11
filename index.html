@@ -1068,7 +1068,7 @@
           </div>
 
           <!-- Service 4 -->
-          <div class="tilt-card group relative rounded-3xl p-[1px] bg-gradient-to-b from-amber-500/40 via-white/5 to-transparent hover:from-amber-500/80 hover:shadow-[0_20px_50px_rgba(245,158,11,0.25)] transition-all duration-500 flex flex-col justify-between">
+          <div id="service-web" class="tilt-card group relative rounded-3xl p-[1px] bg-gradient-to-b from-amber-500/40 via-white/5 to-transparent hover:from-amber-500/80 hover:shadow-[0_20px_50px_rgba(245,158,11,0.25)] transition-all duration-500 flex flex-col justify-between">
             <div class="tilt-card-inner relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5">
               <div>
                 <div class="flex items-center justify-between mb-5 sm:mb-6">
@@ -1112,7 +1112,7 @@
           </div>
 
           <!-- Service 5 -->
-          <div class="tilt-card group relative rounded-3xl p-[1px] bg-gradient-to-b from-sky-500/40 via-white/5 to-transparent hover:from-sky-500/80 hover:shadow-[0_20px_50px_rgba(56,189,248,0.25)] transition-all duration-500 flex flex-col justify-between">
+          <div id="service-biz" class="tilt-card group relative rounded-3xl p-[1px] bg-gradient-to-b from-sky-500/40 via-white/5 to-transparent hover:from-sky-500/80 hover:shadow-[0_20px_50px_rgba(56,189,248,0.25)] transition-all duration-500 flex flex-col justify-between">
             <div class="tilt-card-inner relative h-full rounded-[23px] bg-slateCard/90 backdrop-blur-2xl p-6 sm:p-8 flex flex-col justify-between border border-white/5">
               <div>
                 <div class="flex items-center justify-between mb-5 sm:mb-6">
@@ -1969,13 +1969,18 @@
       <!-- Chat Header -->
       <div class="bg-gradient-to-r from-accentCyan via-blue-600 to-accentViolet px-4 py-3 sm:px-5 sm:py-4 flex items-center justify-between shadow-lg">
         <div class="flex items-center gap-2.5">
-          <div class="relative">
-            <div class="w-2.5 h-2.5 rounded-full bg-accentMint animate-ping absolute inset-0"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-accentMint relative"></div>
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-md flex items-center justify-center text-white shadow-inner shrink-0">
+            <i class="fa-solid fa-robot text-sm sm:text-base"></i>
           </div>
           <div>
             <h4 class="font-bold text-white text-xs sm:text-sm tracking-wide">PrimeNet AI Assistant</h4>
-            <span class="text-[9px] sm:text-[10px] text-white/80 font-medium">Online | UAE Integrator</span>
+            <span class="flex items-center gap-1.5 text-[9px] sm:text-[10px] text-white/80 font-medium">
+              <span class="relative flex w-1.5 h-1.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accentMint opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-accentMint"></span>
+              </span>
+              Online | UAE Integrator
+            </span>
           </div>
         </div>
         <button type="button" onclick="toggleChat(event)" class="text-white/80 hover:text-white text-xs bg-white/10 hover:bg-white/20 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition border-0 cursor-pointer" aria-label="Close chat"><i class="fa-solid fa-xmark"></i></button>
@@ -1998,9 +2003,10 @@
         <button type="button" onclick="quickChat('networking', 'topic', event)" data-type="topic" data-key="networking" class="text-[11px] rounded-full border border-accentCyan/30 bg-accentCyan/10 px-2.5 py-1 text-accentCyan hover:bg-accentCyan hover:text-white transition font-medium cursor-pointer">Networking</button>
         <button type="button" onclick="quickChat('security', 'topic', event)" data-type="topic" data-key="security" class="text-[11px] rounded-full border border-accentViolet/30 bg-accentViolet/10 px-2.5 py-1 text-accentViolet hover:bg-accentViolet hover:text-white transition font-medium cursor-pointer">Security</button>
         <button type="button" onclick="quickChat('servers', 'topic', event)" data-type="topic" data-key="servers" class="text-[11px] rounded-full border border-accentMint/30 bg-accentMint/10 px-2.5 py-1 text-accentMint hover:bg-accentMint hover:text-slateDeep transition font-medium cursor-pointer">Servers</button>
+        <button type="button" onclick="quickChat('showcase', 'topic', event)" data-type="topic" data-key="showcase" class="text-[11px] rounded-full border border-sky-400/30 bg-sky-400/10 px-2.5 py-1 text-sky-300 hover:bg-sky-400 hover:text-white transition font-medium cursor-pointer">Showcase</button>
+        <button type="button" onclick="quickChat('web designing', 'topic', event)" data-type="topic" data-key="web designing" class="text-[11px] rounded-full border border-indigo-400/30 bg-indigo-400/10 px-2.5 py-1 text-indigo-300 hover:bg-indigo-400 hover:text-white transition font-medium cursor-pointer">Web Designing</button>
         <button type="button" onclick="quickChat('amc', 'topic', event)" data-type="topic" data-key="amc" class="text-[11px] rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-amber-300 hover:bg-amber-400 hover:text-slateDeep transition font-medium cursor-pointer">AMC</button>
         <button type="button" onclick="quickChat('quote', 'action', event)" data-type="action" data-key="quote" class="text-[11px] rounded-full border border-violet-400/30 bg-violet-400/10 px-2.5 py-1 text-violet-300 hover:bg-violet-400 hover:text-white transition font-medium cursor-pointer">Get Quote</button>
-        <button type="button" onclick="quickChat('specs', 'action', event)" data-type="action" data-key="specs" class="text-[11px] rounded-full border border-rose-400/30 bg-rose-400/10 px-2.5 py-1 text-rose-300 hover:bg-rose-400 hover:text-white transition font-medium cursor-pointer">Specs</button>
         <button type="button" onclick="quickChat('brochure', 'action', event)" data-type="action" data-key="brochure" class="text-[11px] rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 text-emerald-300 hover:bg-emerald-400 hover:text-white transition font-medium cursor-pointer">Brochure</button>
       </div>
 
@@ -2613,6 +2619,15 @@
           { key: 'support', label: 'Migration Support' }
         ]
       },
+      showcase: {
+        title: 'Project Showcase',
+        text: 'Our Project Showcase highlights three turnkey deployments: an Active 10G enterprise backbone (Cat6A/SFP+, redundant switching fabrics), Biometric Access Intelligence (facial AI, speed gates, encrypted audit trails) and Enterprise Compute & Storage Arrays (all-flash NVMe, Tier-3 SAN). Each card opens a solution-specification request and a WhatsApp line for that deployment.',
+        actions: [
+          { key: 'showcaseview', label: 'View Showcase' },
+          { key: 'quote', label: 'Request Quotation' },
+          { key: 'specs', label: 'Deployment Specs' }
+        ]
+      },
       amc: {
         title: 'AMC & Managed Support',
         text: '24/7 mission-critical maintenance contracts — preventative site surveys, hardware replacement, firmware and configuration updates, plus UAE regulatory re-certification support with defined response SLAs.',
@@ -2659,8 +2674,17 @@
       },
       brochure: {
         user: 'I would like the company brochure.',
-        reply: 'The PrimeNet Solutions brochure covers networking, SIRA-compliant security, server and storage, and AMC services.',
+        reply: 'The PrimeNet Solutions brochure covers networking, SIRA-compliant security, server and storage, and AMC services — and page 5 adds our Digital Services: Website Creation & E-Commerce plus Invoicing & Accounting Software (PNS Pro).',
         links: () => [
+          { label: 'Download Brochure (PDF)', href: PNS.brochure, icon: 'fa-file-pdf', tone: 'rose', download: true },
+          { label: 'Open Page 5', href: PNS.brochure + '#page=5', icon: 'fa-file-lines', tone: 'cyan' }
+        ]
+      },
+      showcaseview: {
+        user: 'Show me your project showcase.',
+        reply: 'The Project Showcase section on the homepage features three turnkey implementations delivered across UAE corporate and public-sector sites — open it below, or jump straight to a quotation.',
+        links: () => [
+          { label: 'Open Project Showcase', onClick: "document.getElementById('showcase').scrollIntoView({behavior:'smooth'})", icon: 'fa-cube', tone: 'cyan' },
           { label: 'Download Brochure (PDF)', href: PNS.brochure, icon: 'fa-file-pdf', tone: 'rose', download: true }
         ]
       },
@@ -2720,6 +2744,34 @@
       amber: 'bg-amber-500/15 border-amber-500/40 text-amber-300 hover:bg-amber-500 hover:text-slateDeep'
     };
 
+    // Scrolls to a specific service card (04 // WEB, 05 // BIZ), clearing the fixed header.
+    function scrollToServiceCard(id) {
+      const el = document.getElementById(id);
+      if (!el) {
+        const grid = document.getElementById('services');
+        if (grid) grid.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+      const top = Math.max(0, (el.getBoundingClientRect().top + window.scrollY) - 96);
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+
+    // Points visitors to the Additional Services page (page 5) for the two newest services.
+    function appendBrochureHint(slug) {
+      if (slug !== 'webdev' && slug !== 'invoicing') return;
+      const label = slug === 'webdev'
+        ? 'Website Creation & E-Commerce'
+        : 'Invoicing & Accounting Software';
+      const cardId = slug === 'webdev' ? 'service-web' : 'service-biz';
+      setTimeout(() => {
+        appendBotMessage(`${label} is covered under Additional Services on page 5 of our brochure.`);
+        setTimeout(() => appendLinkRow([
+          { label: 'Open Brochure — Page 5', href: PNS.brochure + '#page=5', icon: 'fa-file-pdf', tone: 'cyan' },
+          { label: 'See the site card', onClick: `scrollToServiceCard('${cardId}')`, icon: 'fa-arrow-down', tone: 'violet' }
+        ]), 180);
+      }, 420);
+    }
+
     function quickChat(key, type = 'topic', event = null, topic = '') {
       if (event) {
         event.stopPropagation();
@@ -2742,6 +2794,7 @@
         'websites & e-commerce': 'webdev',
         'web development': 'webdev',
         'web design': 'webdev',
+        'web designing': 'webdev',
         'e-commerce': 'webdev',
         'ecommerce': 'webdev',
         'invoicing': 'invoicing',
@@ -2749,7 +2802,13 @@
         'invoicing software': 'invoicing',
         'accounting': 'invoicing',
         'accounting software': 'invoicing',
-        'amc': 'amc'
+        'amc': 'amc',
+        'project showcase': 'showcase',
+        'showcase': 'showcase',
+        'case studies': 'showcase',
+        'case study': 'showcase',
+        'past projects': 'showcase',
+        'portfolio': 'showcase'
       };
 
       if (type === 'topic') {
@@ -2764,6 +2823,7 @@
         setTimeout(() => {
           appendBotMessage(kb.text);
           setTimeout(() => appendActionRow(kb.actions, slug), 220);
+          appendBrochureHint(slug);
         }, 500);
         return;
       }
@@ -2864,16 +2924,22 @@
           runBotAction('specs', false);
         } else if (/(whatsapp|call me|phone)/.test(lower)) {
           runBotAction('whatsapp', false);
+        } else if (/(showcase|case stud|portfolio|past projects|reference site|deployments?)/.test(lower)) {
+          const kb = BOT_KNOWLEDGE.showcase;
+          appendBotMessage(kb.text);
+          setTimeout(() => appendActionRow(kb.actions, 'showcase'), 220);
         } else if (/(network|cabling|wifi|switch|router|lan|wan)/.test(lower)) {
           runBotAction('survey', false);
         } else if (/(website|web ?site|web ?dev|web ?design|wordpress|e-?commerce|online store|landing page)/.test(lower)) {
           const kb = BOT_KNOWLEDGE.webdev;
           appendBotMessage(kb.text);
           setTimeout(() => appendActionRow(kb.actions, 'webdev'), 220);
+          appendBrochureHint('webdev');
         } else if (/(invoice|invoicing|accounting|vat|billing|tally|quickbooks|zoho|bookkeep)/.test(lower)) {
           const kb = BOT_KNOWLEDGE.invoicing;
           appendBotMessage(kb.text);
           setTimeout(() => appendActionRow(kb.actions, 'invoicing'), 220);
+          appendBrochureHint('invoicing');
         } else if (/(cctv|security|sira|biometric|access control|alarm)/.test(lower)) {
           runBotAction('audit', false);
         } else if (/(server|storage|nas|san|virtualisation|virtualization|compute)/.test(lower)) {
