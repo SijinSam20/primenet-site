@@ -2684,7 +2684,7 @@
         user: 'Show me your project showcase.',
         reply: 'The Project Showcase section on the homepage features three turnkey implementations delivered across UAE corporate and public-sector sites — open it below, or jump straight to a quotation.',
         links: () => [
-          { label: 'Open Project Showcase', onClick: "document.getElementById('showcase').scrollIntoView({behavior:'smooth'})", icon: 'fa-cube', tone: 'cyan' },
+          { label: 'Open Project Showcase', onClick: "scrollToSectionById('showcase')", icon: 'fa-cube', tone: 'cyan' },
           { label: 'Download Brochure (PDF)', href: PNS.brochure, icon: 'fa-file-pdf', tone: 'rose', download: true }
         ]
       },
@@ -2749,11 +2749,11 @@
       const el = document.getElementById(id);
       if (!el) {
         const grid = document.getElementById('services');
-        if (grid) grid.scrollIntoView({ behavior: 'smooth' });
+        if (grid) scrollToSectionById('services');
         return;
       }
-      const top = Math.max(0, (el.getBoundingClientRect().top + window.scrollY) - 96);
-      window.scrollTo({ top: top, behavior: 'smooth' });
+      const top = el.getBoundingClientRect().top + (window.pageYOffset || window.scrollY) - 96;
+      smoothScrollToY(top, 560);
     }
 
     // Points visitors to the Additional Services page (page 5) for the two newest services.
@@ -3417,6 +3417,56 @@
 
     function toggleScrollSound() { ScrollSound.toggle(); }
 
+    /* ── Animated section scrolling ───────────────────────────────────
+       Native smooth scrolling differs per browser, so this runs its own
+       fixed-duration glide with easing, and aborts instantly if the
+       visitor takes over (wheel, touch or key press). */
+    let scrollAnimId = null;
+    function cancelScrollAnim() {
+      if (scrollAnimId !== null) {
+        cancelAnimationFrame(scrollAnimId);
+        scrollAnimId = null;
+      }
+    }
+    function smoothScrollToY(top, duration = 620) {
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const maxTop = Math.max(0, (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight);
+      const target = Math.min(Math.max(0, top), maxTop);
+      const start = window.pageYOffset || window.scrollY || 0;
+      const delta = target - start;
+
+      if (reduce || Math.abs(delta) < 2) {
+        window.scrollTo(0, target);
+        return;
+      }
+
+      cancelScrollAnim();
+      const easeInOutQuint = (t) => t < 0.5
+        ? 16 * t * t * t * t * t
+        : 1 - Math.pow(-2 * t + 2, 5) / 2;
+      const t0 = performance.now();
+
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / duration);
+        window.scrollTo(0, start + delta * easeInOutQuint(p));
+        if (p < 1) {
+          scrollAnimId = requestAnimationFrame(step);
+        } else {
+          scrollAnimId = null;
+        }
+      };
+      scrollAnimId = requestAnimationFrame(step);
+    }
+    function scrollToSectionById(id, offset = 80) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + (window.pageYOffset || window.scrollY) - offset;
+      smoothScrollToY(top);
+    }
+    ['wheel', 'touchstart', 'keydown'].forEach((evt) => {
+      window.addEventListener(evt, cancelScrollAnim, { passive: true });
+    });
+
     /* Play the navigation swoosh whenever an internal section link is clicked */
     document.addEventListener('click', (e) => {
       const link = e.target && e.target.closest && e.target.closest('a[href^="#"]');
@@ -3425,11 +3475,11 @@
       if (!hash || hash.length < 2) return;
       const target = document.getElementById(hash.slice(1));
       if (!target) return;
-      // Make hash navigation actually scroll (robust across browsers/review pane)
+      // Animated glide to the section, clearing the fixed header
       e.preventDefault();
       const offset = 80;
-      const top = Math.max(0, (target.offsetTop || (target.getBoundingClientRect().top + window.scrollY)) - offset);
-      window.scrollTo({ top, behavior: 'instant' });
+      const top = Math.max(0, target.getBoundingClientRect().top + (window.pageYOffset || window.scrollY) - offset);
+      smoothScrollToY(top, 700);
       try { history.replaceState(null, '', hash); } catch (err) {}
       // Navigation swoosh
       const rel = target.getBoundingClientRect().top;
