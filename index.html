@@ -493,6 +493,57 @@
     .bouncy-word:nth-child(4) { animation-delay: 0.45s; }
     .bouncy-word:nth-child(5) { animation-delay: 0.6s; }
     .bouncy-word:nth-child(6) { animation-delay: 0.75s; }
+
+    /* ── Loading screen ───────────────────────────────────────────── */
+    body.preloader-lock { overflow: hidden; }
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.35rem;
+      background:
+        radial-gradient(60% 50% at 50% 42%, rgba(6, 182, 212, 0.14) 0%, rgba(11, 17, 32, 0) 70%),
+        radial-gradient(45% 40% at 70% 75%, rgba(139, 92, 246, 0.12) 0%, rgba(11, 17, 32, 0) 70%),
+        #0b1120;
+      transition: opacity 0.55s ease, visibility 0.55s ease;
+    }
+    #preloader.preloader-hide { opacity: 0; visibility: hidden; pointer-events: none; }
+    .pl-logo { animation: plLogoPulse 2.6s ease-in-out infinite; }
+    @keyframes plLogoPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 16px rgba(6, 182, 212, 0.35)); }
+      50% { transform: scale(1.045); filter: drop-shadow(0 0 32px rgba(6, 182, 212, 0.6)); }
+    }
+    .pl-track {
+      position: relative;
+      width: 168px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+    .pl-bar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 42%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #06b6d4, #38bdf8, #8b5cf6);
+      box-shadow: 0 0 14px rgba(6, 182, 212, 0.55);
+      animation: plSweep 1.15s ease-in-out infinite;
+    }
+    @keyframes plSweep {
+      0% { transform: translateX(-110%); }
+      100% { transform: translateX(280%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pl-logo, .pl-bar { animation: none; }
+      .pl-bar { width: 100%; opacity: 0.55; }
+      #preloader { transition: none; }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -518,6 +569,44 @@
 </head>
 
 <body class="bg-slateDeep text-textMain font-sans antialiased selection:bg-accentCyan/30 selection:text-white overflow-x-hidden">
+
+  <!-- Loading screen (removed automatically once the page is ready) -->
+  <div id="preloader" role="status" aria-live="polite" aria-label="Loading PrimeNet Solutions">
+    <img src="logo/PNS_Logo.png" alt="" class="pl-logo h-16 sm:h-20 w-auto object-contain" />
+    <div class="text-center px-6">
+      <p class="font-display text-white text-sm sm:text-base font-extrabold tracking-[0.22em] uppercase">PrimeNet Solutions</p>
+      <p class="text-[9px] sm:text-[10px] text-textSub/70 font-mono tracking-[0.24em] mt-1.5">CONNECTING VISION TO REALITY</p>
+    </div>
+    <div class="pl-track" aria-hidden="true"><div class="pl-bar"></div></div>
+    <p class="text-[10px] text-accentCyan/80 font-mono tracking-[0.2em]">LOADING</p>
+  </div>
+  <script>
+    (function () {
+      var el = document.getElementById('preloader');
+      if (!el) return;
+      var start = performance.now();
+      var MIN_VISIBLE = 700;   // avoids a jarring flash on fast loads
+      var MAX_VISIBLE = 4500;  // never trap the visitor if an asset stalls
+      var done = false;
+
+      document.body.classList.add('preloader-lock');
+
+      function hide() {
+        if (done) return;
+        done = true;
+        var wait = Math.max(0, MIN_VISIBLE - (performance.now() - start));
+        setTimeout(function () {
+          el.classList.add('preloader-hide');
+          document.body.classList.remove('preloader-lock');
+          setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 700);
+        }, wait);
+      }
+
+      if (document.readyState === 'complete') hide();
+      else window.addEventListener('load', hide, { once: true });
+      setTimeout(hide, MAX_VISIBLE);
+    })();
+  </script>
 
   <!-- Header & Navigation -->
   <header id="navbar" class="glass-layer fixed top-0 left-0 w-full z-50 bg-slateDeep/70 border-b border-white/[0.06] transition-all duration-300">
